@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { router, page } from '@inertiajs/svelte';
+    import { page } from '@inertiajs/svelte';
 
     const THEME_MAP = { light: 'yado', dark: 'yado-dark' };
 
@@ -25,7 +25,19 @@
 
         const authUser = $page.props.auth?.user;
         if (authUser) {
-            router.patch('/account/theme', { theme: nextMode }, { preserveState: true, preserveScroll: true, only: [] });
+            const token = document.querySelector('meta[name="csrf-token"]')?.content
+                || decodeURIComponent(document.cookie.match(/XSRF-TOKEN=([^;]+)/)?.[1] || '');
+
+            fetch('/account/theme', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-XSRF-TOKEN': token,
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({ theme: nextMode }),
+            }).catch(() => {});
         }
     }
 
