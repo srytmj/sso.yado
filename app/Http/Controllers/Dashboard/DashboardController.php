@@ -21,6 +21,6 @@ class DashboardController extends Controller
 
         $clients = Client::orderByDesc('created_at')->get();
 
-        return view('dashboard.index', compact('stats', 'clients'));
+        return Inertia::render('Dashboard/Index', ['stats' => $stats, 'clients' => $clients]);
     }
 }

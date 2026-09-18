@@ -18,7 +18,7 @@ class LoginController extends Controller
     {
         $clientName = $this->resolveClientName($request);
 
-        return view('auth.login', compact('clientName'));
+        return Inertia::render('Auth/Login', ['clientName' => $clientName]);
     }
 
     public function store(Request $request): RedirectResponse
