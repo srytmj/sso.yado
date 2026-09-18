@@ -20,8 +20,8 @@
 
     <div bind:this={container} class="w-full max-w-md relative z-10">
         <div class="text-center mb-10">
-            <h1 class="text-4xl font-bold tracking-tighter text-base-content mb-2 uppercase">Yado</h1>
-            <p class="text-sm tracking-widest text-base-content/50 uppercase">Identity Provider</p>
+            <h1 class="text-5xl font-serif italic tracking-tight text-base-content mb-3">Yado</h1>
+            <p class="text-xs font-semibold tracking-widest text-base-content/50 uppercase">Identity Provider</p>
         </div>
 
         <div bind:this={card} class="bg-base-100 rounded-2xl shadow-2xl shadow-base-content/5 border border-base-content/10 overflow-hidden">

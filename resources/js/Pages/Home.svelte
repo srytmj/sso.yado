@@ -22,7 +22,7 @@
 
 <div bind:this={container} class="min-h-screen flex flex-col items-center justify-center bg-base-100 text-base-content p-6">
     <div class="max-w-2xl text-center space-y-6">
-        <h1 bind:this={title} class="text-5xl font-bold tracking-tight">SSO Yado</h1>
+        <h1 bind:this={title} class="text-7xl font-serif italic tracking-tight text-base-content">Yado</h1>
         <p bind:this={subtitle} class="text-lg text-base-content/70">Central Identity Provider for the Yado ecosystem.</p>
         
         <div bind:this={buttons} class="flex justify-center gap-4 mt-8">
