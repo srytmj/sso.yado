@@ -11,8 +11,7 @@ gsap.defaults({
 createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.svelte', { eager: true });
-        let page = pages['./Pages/' + name + '.svelte'];
-        return page.default || page;
+        return pages['./Pages/' + name + '.svelte'];
     },
     setup({ el, App, props }) {
         mount(App, { target: el, props });
