@@ -16,7 +16,7 @@ class ForgotPasswordController extends Controller
 
     public function show(): InertiaResponse
     {
-        return Inertia::render('Auth/Forgot-password');
+        return Inertia::render('Auth/ForgotPassword');
     }
 
     public function store(Request $request): RedirectResponse

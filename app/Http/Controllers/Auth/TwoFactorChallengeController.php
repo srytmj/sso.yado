@@ -25,7 +25,7 @@ class TwoFactorChallengeController extends Controller
             return redirect()->route('login');
         }
 
-        return Inertia::render('Auth/Two-factor-challenge');
+        return Inertia::render('Auth/TwoFactorChallenge');
     }
 
     public function verify(Request $request): RedirectResponse

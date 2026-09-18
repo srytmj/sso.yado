@@ -26,7 +26,7 @@ class TwoFactorController extends Controller
 
         $pendingSecret = $request->session()->get('pending_2fa_secret');
 
-        return Inertia::render('Account/Two-factor', [
+        return Inertia::render('Account/TwoFactor', [
             'user' => $user,
             'qrCodeSvg' => $pendingSecret ? $this->twoFactor->qrCodeSvg($user, $pendingSecret) : null,
             'manualKey' => $pendingSecret,

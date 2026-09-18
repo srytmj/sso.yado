@@ -18,7 +18,7 @@ class AuditLogController extends Controller
         $search = $request->query('q');
         $page = max(1, (int) $request->query('page', 1));
 
-        return Inertia::render('Dashboard/Audit-log/Index', [
+        return Inertia::render('Dashboard/AuditLog/Index', [
             'entries' => $this->service->paginate($event, $search, $page),
             'events' => AuditLogService::EVENTS,
             'event' => $event,

@@ -16,7 +16,7 @@ class VerificationController extends Controller
 
     public function notice(): InertiaResponse
     {
-        return Inertia::render('Auth/Verify-email');
+        return Inertia::render('Auth/Verify');
     }
 
     public function verify(EmailVerificationRequest $request): RedirectResponse

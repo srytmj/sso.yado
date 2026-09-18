@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { gsap } from 'gsap';
-    import { inertia, page } from '@inertiajs/svelte';
+    import { Link, page } from '@inertiajs/svelte';
 
     let container;
     let title;
@@ -26,15 +26,13 @@
         <p bind:this={subtitle} class="text-lg text-base-content/70">Central Identity Provider for the Yado ecosystem.</p>
         
         <div bind:this={buttons} class="flex justify-center gap-4 mt-8">
-            {#if $page.props.auth.user}
-                <a href="/dashboard" use:inertia class="btn btn-neutral">Go to Dashboard</a>
-                <a href="/account" use:inertia class="btn btn-outline">My Account</a>
-                <form method="POST" action="/logout">
-                    <button type="submit" class="btn btn-ghost">Logout</button>
-                </form>
+            {#if $page.props.auth?.user}
+                <Link href="/dashboard" class="btn btn-neutral">Go to Dashboard</Link>
+                <Link href="/account" class="btn btn-outline">My Account</Link>
+                <Link href="/logout" method="post" as="button" class="btn btn-ghost">Logout</Link>
             {:else}
-                <a href="/login" use:inertia class="btn btn-neutral">Login</a>
-                <a href="/register" use:inertia class="btn btn-outline">Register</a>
+                <Link href="/login" class="btn btn-neutral">Login</Link>
+                <Link href="/register" class="btn btn-outline">Register</Link>
             {/if}
         </div>
     </div>

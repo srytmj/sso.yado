@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { gsap } from 'gsap';
-    import { inertia, useForm } from '@inertiajs/svelte';
+    import { Link, useForm } from '@inertiajs/svelte';
     import AuthLayout from '../../Layouts/AuthLayout.svelte';
 
     let formElements;
@@ -42,32 +42,32 @@
     <form on:submit|preventDefault={submit} bind:this={formElements} class="space-y-4">
         
         <div class="form-control">
-            <label class="label"><span class="label-text font-medium">Name (Optional)</span></label>
-            <input type="text" bind:value={$form.name} class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
+            <label class="label" for="reg-name"><span class="label-text font-medium">Name (Optional)</span></label>
+            <input id="reg-name" type="text" bind:value={$form.name} class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
             {#if $form.errors.name}<p class="text-xs text-error mt-1">{$form.errors.name}</p>{/if}
         </div>
 
         <div class="form-control">
-            <label class="label"><span class="label-text font-medium">Username</span></label>
-            <input type="text" bind:value={$form.username} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
+            <label class="label" for="reg-username"><span class="label-text font-medium">Username</span></label>
+            <input id="reg-username" type="text" bind:value={$form.username} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
             {#if $form.errors.username}<p class="text-xs text-error mt-1">{$form.errors.username}</p>{/if}
         </div>
 
         <div class="form-control">
-            <label class="label"><span class="label-text font-medium">Email Address</span></label>
-            <input type="email" bind:value={$form.email} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
+            <label class="label" for="reg-email"><span class="label-text font-medium">Email Address</span></label>
+            <input id="reg-email" type="email" bind:value={$form.email} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
             {#if $form.errors.email}<p class="text-xs text-error mt-1">{$form.errors.email}</p>{/if}
         </div>
 
         <div class="form-control">
-            <label class="label"><span class="label-text font-medium">Password</span></label>
-            <input type="password" bind:value={$form.password} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
+            <label class="label" for="reg-pass"><span class="label-text font-medium">Password</span></label>
+            <input id="reg-pass" type="password" bind:value={$form.password} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
             {#if $form.errors.password}<p class="text-xs text-error mt-1">{$form.errors.password}</p>{/if}
         </div>
         
         <div class="form-control">
-            <label class="label"><span class="label-text font-medium">Confirm Password</span></label>
-            <input type="password" bind:value={$form.password_confirmation} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
+            <label class="label" for="reg-pass-confirm"><span class="label-text font-medium">Confirm Password</span></label>
+            <input id="reg-pass-confirm" type="password" bind:value={$form.password_confirmation} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
         </div>
 
         <button type="submit" class="btn btn-neutral w-full mt-6 shadow-lg shadow-neutral/20" disabled={$form.processing}>
@@ -80,7 +80,7 @@
 
         <div class="text-center mt-6 text-sm text-base-content/60">
             Already have an account? 
-            <a href="/login" use:inertia class="font-semibold text-base-content hover:underline transition-colors">Sign In</a>
+            <Link href="/login" class="font-semibold text-base-content hover:underline transition-colors">Sign In</Link>
         </div>
     </form>
 </AuthLayout>
