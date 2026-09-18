@@ -42,5 +42,12 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('oauth', function ($request) {
             return Limit::perMinute(30)->by($request->ip());
         });
+
+        // Rate limit login per email + IP (10 percobaan per menit) agar typo wajar tidak langsung terblokir
+        RateLimiter::for('login', function ($request) {
+            $email = (string) $request->input('email');
+
+            return Limit::perMinute(10)->by($email.'|'.$request->ip());
+        });
     }
 }

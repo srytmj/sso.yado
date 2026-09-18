@@ -30,20 +30,20 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/health', [HealthController::class, 'check'])->name('health')->middleware('throttle:60,1');
 
 // Guest-only
-Route::middleware(['guest', 'throttle:60,1'])->group(function () {
+Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:5,1');
+    Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:login');
 
     Route::get('/register', [RegisterController::class, 'show'])->name('register');
-    Route::post('/register', [RegisterController::class, 'store'])->middleware('throttle:5,1');
+    Route::post('/register', [RegisterController::class, 'store'])->middleware('throttle:10,1');
 
     Route::get('/register/invite', [InviteController::class, 'show'])->name('invite.show');
-    Route::post('/register/invite', [InviteController::class, 'store'])->name('invite.store')->middleware('throttle:5,1');
+    Route::post('/register/invite', [InviteController::class, 'store'])->name('invite.store')->middleware('throttle:10,1');
 
     Route::get('/forgot-password', [ForgotPasswordController::class, 'show'])->name('password.request');
-    Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email')->middleware('throttle:3,1');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email')->middleware('throttle:5,1');
     Route::get('/reset-password', [ResetPasswordController::class, 'show'])->name('password.reset');
-    Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('password.update')->middleware('throttle:5,1');
+    Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('password.update')->middleware('throttle:10,1');
 });
 
 // Two-factor challenge - user sudah lolos password tapi belum lolos TOTP, jadi bukan guest
