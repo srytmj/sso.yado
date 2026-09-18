@@ -12,8 +12,10 @@ use App\Services\AuditLogService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class AccountController extends Controller
 {
@@ -25,9 +27,9 @@ class AccountController extends Controller
         private readonly AuditLogService $auditLog,
     ) {}
 
-    public function show(Request $request): View
+    public function show(Request $request): InertiaResponse
     {
-        return view('account.show', ['user' => $request->user()]);
+        return Inertia::render('Account/Show', ['user' => $request->user()]);
     }
 
     public function changePassword(Request $request): RedirectResponse
@@ -67,7 +69,7 @@ class AccountController extends Controller
         return back()->with('success', __('account.avatar_updated'));
     }
 
-    public function sessions(Request $request): View
+    public function sessions(Request $request): InertiaResponse
     {
         /** @var User $user */
         $user = $request->user();
@@ -84,7 +86,7 @@ class AccountController extends Controller
             ->orderByDesc('last_activity')
             ->get();
 
-        return view('account.sessions', [
+        return Inertia::render('Account/Sessions', [
             'tokens' => $tokens,
             'devices' => $devices,
             'currentSessionId' => $request->session()->getId(),

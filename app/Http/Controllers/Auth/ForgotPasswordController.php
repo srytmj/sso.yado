@@ -6,16 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Services\AuditLogService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Password;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class ForgotPasswordController extends Controller
 {
     public function __construct(private readonly AuditLogService $auditLog) {}
 
-    public function show(): View
+    public function show(): InertiaResponse
     {
-        return view('auth.forgot-password');
+        return Inertia::render('Auth/Forgot-password');
     }
 
     public function store(Request $request): RedirectResponse

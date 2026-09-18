@@ -6,14 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Services\Auth\LoginService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class LoginController extends Controller
 {
     public function __construct(private readonly LoginService $loginService) {}
 
-    public function show(Request $request): View
+    public function show(Request $request): InertiaResponse
     {
         $clientName = $this->resolveClientName($request);
 

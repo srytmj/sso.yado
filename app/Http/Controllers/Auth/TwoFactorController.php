@@ -8,8 +8,10 @@ use App\Services\AuditLogService;
 use App\Services\Auth\TwoFactorService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class TwoFactorController extends Controller
 {
@@ -18,14 +20,14 @@ class TwoFactorController extends Controller
         private readonly AuditLogService $auditLog,
     ) {}
 
-    public function show(Request $request): View
+    public function show(Request $request): InertiaResponse
     {
         /** @var User $user */
         $user = $request->user();
 
         $pendingSecret = $request->session()->get('pending_2fa_secret');
 
-        return view('account.two-factor', [
+        return Inertia::render('Account/Two-factor', [
             'user' => $user,
             'qrCodeSvg' => $pendingSecret ? $this->twoFactor->qrCodeSvg($user, $pendingSecret) : null,
             'manualKey' => $pendingSecret,

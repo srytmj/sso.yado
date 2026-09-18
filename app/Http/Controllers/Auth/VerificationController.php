@@ -7,15 +7,17 @@ use App\Services\AuditLogService;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class VerificationController extends Controller
 {
     public function __construct(private readonly AuditLogService $auditLog) {}
 
-    public function notice(): View
+    public function notice(): InertiaResponse
     {
-        return view('auth.verify-email');
+        return Inertia::render('Auth/Verify-email');
     }
 
     public function verify(EmailVerificationRequest $request): RedirectResponse

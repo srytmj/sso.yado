@@ -7,18 +7,20 @@ use App\Services\AuditLogService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class ResetPasswordController extends Controller
 {
     public function __construct(private readonly AuditLogService $auditLog) {}
 
-    public function show(Request $request): View
+    public function show(Request $request): InertiaResponse
     {
-        return view('auth.reset-password', [
+        return Inertia::render('Auth/Reset-password', [
             'token' => $request->query('token'),
             'email' => $request->query('email'),
         ]);

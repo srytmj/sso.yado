@@ -11,12 +11,12 @@
     --color-base-200: oklch(98% 0 0);
     --color-base-300: oklch(94% 0 0);
     --color-base-content: oklch(21% 0.006 285);
-    --color-primary: oklch(54% 0.22 262);
-    --color-primary-content: oklch(97% 0.01 262);
-    --color-secondary: oklch(55% 0.2 293);
-    --color-secondary-content: oklch(97% 0.01 293);
-    --color-accent: oklch(59% 0.14 163);
-    --color-accent-content: oklch(97% 0.02 163);
+    --color-primary: oklch(21% 0.006 285);
+    --color-primary-content: oklch(97% 0 0);
+    --color-secondary: oklch(94% 0 0);
+    --color-secondary-content: oklch(21% 0.006 285);
+    --color-accent: oklch(21% 0.006 285);
+    --color-accent-content: oklch(97% 0 0);
     --color-neutral: oklch(21% 0.006 285);
     --color-neutral-content: oklch(97% 0 0);
     --color-info: oklch(58% 0.15 237);
@@ -44,12 +44,12 @@
     --color-base-200: oklch(16% 0.006 285);
     --color-base-300: oklch(13% 0.006 285);
     --color-base-content: oklch(96% 0.002 285);
-    --color-primary: oklch(70% 0.16 262);
-    --color-primary-content: oklch(18% 0.03 262);
-    --color-secondary: oklch(72% 0.15 293);
-    --color-secondary-content: oklch(18% 0.03 293);
-    --color-accent: oklch(72% 0.13 163);
-    --color-accent-content: oklch(18% 0.03 163);
+    --color-primary: oklch(96% 0.002 285);
+    --color-primary-content: oklch(19% 0.006 285);
+    --color-secondary: oklch(13% 0.006 285);
+    --color-secondary-content: oklch(96% 0.002 285);
+    --color-accent: oklch(96% 0.002 285);
+    --color-accent-content: oklch(19% 0.006 285);
     --color-neutral: oklch(96% 0.002 285);
     --color-neutral-content: oklch(19% 0.006 285);
     --color-info: oklch(72% 0.12 237);
@@ -70,7 +70,8 @@
     --noise: 0;
 }
 
-@source '../../storage/framework/views/*.php';
+@source '../../resources/js/**/*.svelte';
+@source '../../resources/views/*.php';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -79,25 +80,9 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-[x-cloak] {
-    display: none !important;
-}
-
-/*
- * Micro-interactions global - supaya UI kerasa hidup, bukan statis. Dua lapis:
- *
- * 1. CSS (di sini) - murah, selalu jalan tanpa nunggu JS load: transisi warna/
- *    border/shadow yang halus di semua elemen, plus hover-lift di tiap `.card`.
- * 2. JS (resources/js/animate.js, pakai anime.js) - gerakan yang beneran kerasa:
- *    tombol yang "mantul" pas ditekan (spring/elastic, bukan cuma fade), dan
- *    kartu/alert yang masuk dengan stagger pas halaman dimuat. `.animate-fade-in`
- *    dkk di bawah ini SENGAJA tanpa animasi CSS - elemen itu di-animate dari JS
- *    (anime.js set nilai awal opacity/transform sendiri sebelum animasi jalan),
- *    kalau JS gagal load elemen tetap kelihatan normal (aman, bukan ke-hide).
- */
 * {
-    transition-property: color, background-color, border-color, box-shadow;
-    transition-duration: 150ms;
+    transition-property: background-color, border-color, box-shadow;
+    transition-duration: 200ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -106,20 +91,4 @@
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
     }
-}
-
-a, button, .link, [role="button"] {
-    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
-    transition-duration: 150ms;
-}
-
-.card {
-    transition-property: transform, box-shadow, border-color;
-    transition-duration: 200ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px -8px oklch(0% 0 0 / 0.18);
 }

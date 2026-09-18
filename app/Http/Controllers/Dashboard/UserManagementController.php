@@ -9,7 +9,9 @@ use App\Models\User;
 use App\Services\Dashboard\UserManagementService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class UserManagementController extends Controller
 {
@@ -18,9 +20,9 @@ class UserManagementController extends Controller
         private readonly InviteUserAction $inviteAction,
     ) {}
 
-    public function index(): View
+    public function index(): InertiaResponse
     {
-        return view('dashboard.users.index', [
+        return Inertia::render('Dashboard/Users/Index', [
             'users' => $this->service->list(),
             'roles' => Role::all(),
         ]);
@@ -44,9 +46,9 @@ class UserManagementController extends Controller
         return back()->with('success', 'Role user diperbarui.');
     }
 
-    public function invite(): View
+    public function invite(): InertiaResponse
     {
-        return view('dashboard.users.invite', ['roles' => Role::all()]);
+        return Inertia::render('Dashboard/Users/Invite', ['roles' => Role::all()]);
     }
 
     public function sendInvite(Request $request): RedirectResponse

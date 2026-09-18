@@ -8,8 +8,10 @@ use App\Services\AuditLogService;
 use App\Services\Auth\TwoFactorService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class TwoFactorChallengeController extends Controller
 {
@@ -18,13 +20,13 @@ class TwoFactorChallengeController extends Controller
         private readonly AuditLogService $auditLog,
     ) {}
 
-    public function show(Request $request): View|RedirectResponse
+    public function show(Request $request): InertiaResponse|RedirectResponse
     {
         if (! $request->session()->has('mfa_pending_user_id')) {
             return redirect()->route('login');
         }
 
-        return view('auth.two-factor-challenge');
+        return Inertia::render('Auth/Two-factor-challenge');
     }
 
     public function verify(Request $request): RedirectResponse

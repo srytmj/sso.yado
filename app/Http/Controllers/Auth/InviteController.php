@@ -8,22 +8,24 @@ use App\Models\UserInvitation;
 use App\Services\AuditLogService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class InviteController extends Controller
 {
     public function __construct(private readonly AuditLogService $auditLog) {}
 
-    public function show(Request $request): View|RedirectResponse
+    public function show(Request $request): InertiaResponse|RedirectResponse
     {
         $invitation = $this->resolveInvitation($request->query('token', ''));
 
         if (! $invitation) {
-            return view('auth.invite', ['error' => $this->tokenError($request->query('token', ''))]);
+            return Inertia::render('Auth/Invite', ['error' => $this->tokenError($request->query('token', ''))]);
         }
 
-        return view('auth.invite', ['invitation' => $invitation]);
+        return Inertia::render('Auth/Invite', ['invitation' => $invitation]);
     }
 
     public function store(Request $request): RedirectResponse

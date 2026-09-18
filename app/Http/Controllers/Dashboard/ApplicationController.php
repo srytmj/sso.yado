@@ -8,22 +8,24 @@ use App\Rules\RedirectUriRule;
 use App\Services\Dashboard\ApplicationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class ApplicationController extends Controller
 {
     public function __construct(private readonly ApplicationService $service) {}
 
-    public function index(): View
+    public function index(): InertiaResponse
     {
-        return view('dashboard.applications.index', [
+        return Inertia::render('Dashboard/Applications/Index', [
             'clients' => $this->service->list(),
         ]);
     }
 
-    public function create(): View
+    public function create(): InertiaResponse
     {
-        return view('dashboard.applications.create');
+        return Inertia::render('Dashboard/Applications/Create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -39,9 +41,9 @@ class ApplicationController extends Controller
             ->with('new_secret', $client->plainSecret);
     }
 
-    public function show(Client $application): View
+    public function show(Client $application): InertiaResponse
     {
-        return view('dashboard.applications.show', ['client' => $application]);
+        return Inertia::render('Dashboard/Applications/Show', ['client' => $application]);
     }
 
     public function update(Request $request, Client $application): RedirectResponse

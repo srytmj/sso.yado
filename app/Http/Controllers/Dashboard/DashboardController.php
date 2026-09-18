@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
+
 use App\Http\Controllers\Controller;
 use App\Models\OAuth\Client;
 use App\Models\User;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index(): InertiaResponse
     {
         $stats = [
             'users_active' => User::active()->count(),

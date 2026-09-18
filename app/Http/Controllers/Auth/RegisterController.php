@@ -7,8 +7,10 @@ use App\Services\AuditLogService;
 use App\Services\Auth\RegisterService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class RegisterController extends Controller
 {
@@ -17,9 +19,9 @@ class RegisterController extends Controller
         private readonly AuditLogService $auditLog,
     ) {}
 
-    public function show(): View
+    public function show(): InertiaResponse
     {
-        return view('auth.register');
+        return Inertia::render('Auth/Register');
     }
 
     public function store(Request $request): RedirectResponse

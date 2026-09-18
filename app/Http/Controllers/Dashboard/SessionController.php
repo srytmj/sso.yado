@@ -7,7 +7,9 @@ use App\Services\AuditLogService;
 use App\Services\Dashboard\SessionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class SessionController extends Controller
 {
@@ -16,9 +18,9 @@ class SessionController extends Controller
         private readonly AuditLogService $auditLog,
     ) {}
 
-    public function index(): View
+    public function index(): InertiaResponse
     {
-        return view('dashboard.sessions.index', [
+        return Inertia::render('Dashboard/Sessions/Index', [
             'oauthSessions' => $this->service->allOAuthSessions(),
             'webSessions'   => $this->service->allWebSessions(),
         ]);

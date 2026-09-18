@@ -7,8 +7,10 @@ use App\Services\AuditLogService;
 use App\Services\Dashboard\SettingsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\View\View;
+use Illuminate\InertiaResponse\InertiaResponse;
 
 class SettingsController extends Controller
 {
@@ -17,9 +19,9 @@ class SettingsController extends Controller
         private readonly AuditLogService $auditLog,
     ) {}
 
-    public function index(): View
+    public function index(): InertiaResponse
     {
-        return view('dashboard.settings.index', [
+        return Inertia::render('Dashboard/Settings/Index', [
             'settings' => $this->settings->all(),
         ]);
     }
