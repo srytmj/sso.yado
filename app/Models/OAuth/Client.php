@@ -24,6 +24,6 @@ class Client extends PassportClient
 
     public function skipsAuthorization(Authenticatable $user, array $scopes): bool
     {
-        return $this->firstParty();
+        return ! $this->revoked;
     }
 }

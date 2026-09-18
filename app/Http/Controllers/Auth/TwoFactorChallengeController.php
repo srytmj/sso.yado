@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class TwoFactorChallengeController extends Controller
 {
@@ -28,7 +29,7 @@ class TwoFactorChallengeController extends Controller
         return Inertia::render('Auth/TwoFactorChallenge');
     }
 
-    public function verify(Request $request): RedirectResponse
+    public function verify(Request $request): Response
     {
         $userId = $request->session()->get('mfa_pending_user_id');
 
@@ -61,6 +62,12 @@ class TwoFactorChallengeController extends Controller
         Auth::login($user, $remember);
         $request->session()->regenerate();
         $this->auditLog->record('auth.login', 'Login berhasil (2FA)', $user);
+
+        $intended = $request->session()->pull('url.intended');
+
+        if ($intended) {
+            return Inertia::location($intended);
+        }
 
         $default = $user->role?->slug === 'superadmin'
             ? route('dashboard.index')

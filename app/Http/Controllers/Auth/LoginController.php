@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -21,7 +22,7 @@ class LoginController extends Controller
         return Inertia::render('Auth/Login', ['clientName' => $clientName]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): Response
     {
         $validated = $request->validate([
             'email' => ['required', 'string'],
@@ -35,6 +36,12 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate();
+
+        $intended = $request->session()->pull('url.intended');
+
+        if ($intended) {
+            return Inertia::location($intended);
+        }
 
         $default = auth()->user()->role?->slug === 'superadmin'
             ? route('dashboard.index')
