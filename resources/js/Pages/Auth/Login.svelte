@@ -53,13 +53,13 @@
         {/if}
 
         <div class="form-control">
-            <label class="label" for="login-email"><span class="label-text font-medium">Email Address</span></label>
-            <input id="login-email" type="email" bind:value={$form.email} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
+            <label class="label" for="login-email"><span class="label-text font-medium">Email Address or Username</span></label>
+            <input id="login-email" type="text" autocomplete="username" placeholder="name@example.com or username" bind:value={$form.email} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
         </div>
 
         <div class="form-control">
             <label class="label" for="login-password"><span class="label-text font-medium">Password</span></label>
-            <input id="login-password" type="password" bind:value={$form.password} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
+            <input id="login-password" type="password" autocomplete="current-password" bind:value={$form.password} required class="input input-bordered w-full bg-base-100 transition-colors focus:border-base-content" />
         </div>
 
         <div class="flex items-center justify-between mt-2">
