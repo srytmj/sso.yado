@@ -86,7 +86,7 @@ return [
         ],
 
         // Dipertahankan khusus untuk migrasi data satu kali dari MySQL lama ke Postgres
-        // (lihat `php artisan db:migrate-to-pgsql`) — bukan connection aktif aplikasi.
+        // (lihat `php artisan db:migrate-to-pgsql`) - bukan connection aktif aplikasi.
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('MYSQL_LEGACY_URL'),

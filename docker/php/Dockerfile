@@ -31,19 +31,19 @@ RUN apk add --no-cache \
     && apk del $PHPIZE_DEPS \
     && rm -rf /var/cache/apk/*
 # pdo_mysql dipertahankan HANYA untuk `php artisan db:migrate-to-pgsql` (baca data lama
-# dari MySQL sekali saat pindah ke Postgres) — koneksi aktif aplikasi selalu pgsql.
+# dari MySQL sekali saat pindah ke Postgres) - koneksi aktif aplikasi selalu pgsql.
 
 WORKDIR /var/www/html
 
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
 # bootstrap/cache/*.php dari host bisa berisi daftar package versi dev (mis. laravel/pail)
-# yang tidak ikut ter-install di vendor --no-dev di atas — pakai yang di-regenerate ulang
+# yang tidak ikut ter-install di vendor --no-dev di atas - pakai yang di-regenerate ulang
 # oleh `composer dump-autoload` di stage vendor supaya konsisten dengan isi vendor/ final.
 COPY --from=vendor /app/bootstrap/cache ./bootstrap/cache
 COPY --from=assets /app/public/build ./public/build
 
-# public/ di-mount sebagai named volume saat runtime (dishare dengan container nginx —
+# public/ di-mount sebagai named volume saat runtime (dishare dengan container nginx -
 # nginx dan PHP-FPM harus melihat file yang sama persis di path yang sama). Volume
 # named tidak otomatis ter-refresh saat image di-rebuild, jadi simpan salinan hasil
 # build ini di public-src sebagai sumber sinkronisasi tiap container start

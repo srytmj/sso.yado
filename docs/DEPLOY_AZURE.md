@@ -1,4 +1,4 @@
-# Deploy ke Azure — SSO Engine
+# Deploy ke Azure - SSO Engine
 
 Panduan deploy `sso.yado.my.id` ke Azure menggunakan **Azure App Service** (cara paling mudah) atau **Azure VM** (lebih kontrol, lebih mirip VPS).
 
@@ -17,18 +17,18 @@ Panduan deploy `sso.yado.my.id` ke Azure menggunakan **Azure App Service** (cara
 
 ---
 
-## Cara A — Azure VM (Rekomendasi)
+## Cara A - Azure VM (Rekomendasi)
 
 ### 1. Buat VM di Azure Portal
 
 1. Buka [portal.azure.com](https://portal.azure.com) → **Create a resource** → **Virtual Machine**
 2. Konfigurasi:
-   - **Image**: Ubuntu Server 24.04 LTS — **jangan pilih 26.04**, PPA PHP belum support
-   - **Size**: B1s (1 vCPU, 1GB RAM) — cukup untuk mulai
+   - **Image**: Ubuntu Server 24.04 LTS - **jangan pilih 26.04**, PPA PHP belum support
+   - **Size**: B1s (1 vCPU, 1GB RAM) - cukup untuk mulai
    - **Authentication**: SSH public key
    - **Inbound ports**: buka port 22 (SSH), 80 (HTTP), 443 (HTTPS)
 3. Klik **Review + Create** → **Create**
-4. Download private key `.pem` saat diminta — simpan baik-baik
+4. Download private key `.pem` saat diminta - simpan baik-baik
 
 ### 2. Connect ke VM
 
@@ -43,14 +43,14 @@ ssh -i your-key.pem azureuser@<PUBLIC_IP>
 # Update system
 sudo apt update && sudo apt upgrade -y
 
-# Install PHP 8.4 + extensions (wajib — symfony 8.x require PHP >=8.4.1)
+# Install PHP 8.4 + extensions (wajib - symfony 8.x require PHP >=8.4.1)
 sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
 sudo apt install -y php8.4 php8.4-fpm php8.4-pgsql php8.4-mbstring \
     php8.4-xml php8.4-curl php8.4-zip php8.4-bcmath php8.4-cli
 
-# Jika pakai Ubuntu 26.04 (Resolute), skip PPA — gunakan PHP 8.5 dari default repo:
+# Jika pakai Ubuntu 26.04 (Resolute), skip PPA - gunakan PHP 8.5 dari default repo:
 # sudo apt install -y php8.5 php8.5-fpm php8.5-pgsql php8.5-mbstring \
 #     php8.5-xml php8.5-curl php8.5-zip php8.5-bcmath php8.5-cli
 
@@ -63,7 +63,7 @@ sudo apt install -y nginx
 
 # Install PostgreSQL
 sudo apt install -y postgresql postgresql-contrib
-# Tidak ada mysql_secure_installation di Postgres — Ubuntu default pakai peer/md5 auth,
+# Tidak ada mysql_secure_installation di Postgres - Ubuntu default pakai peer/md5 auth,
 # set password user postgres langsung di step "Setup Database" di bawah
 
 # Install Node (untuk Vite build)
@@ -86,7 +86,7 @@ ALTER USER postgres WITH PASSWORD 'strong-password-here';
 \q
 ```
 
-Proyek ini pakai model satu superuser Postgres (bukan pola root + user dedicated seperti MySQL) — `.env` nanti diisi `DB_USERNAME=postgres` dan `DB_PASSWORD` sama dengan password yang di-set di atas.
+Proyek ini pakai model satu superuser Postgres (bukan pola root + user dedicated seperti MySQL) - `.env` nanti diisi `DB_USERNAME=postgres` dan `DB_PASSWORD` sama dengan password yang di-set di atas.
 
 ### 5. Clone & Setup Project
 
@@ -107,7 +107,7 @@ Isi `.env` yang wajib diubah:
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://sso.yado.my.id
-ASSET_URL=https://sso.yado.my.id   # harus sama dengan APP_URL — tanpa ini CSS tidak load
+ASSET_URL=https://sso.yado.my.id   # harus sama dengan APP_URL - tanpa ini CSS tidak load
 
 DB_HOST=127.0.0.1
 DB_PORT=5432
@@ -218,7 +218,7 @@ curl -I https://sso.yado.my.id
 
 ---
 
-## Cara B — Azure App Service
+## Cara B - Azure App Service
 
 ### 1. Buat App Service
 
@@ -310,7 +310,7 @@ php artisan config:cache && php artisan route:cache
 
 ### Azure VM
 
-**Dari lokal** (tanpa perlu SSH manual — butuh `SERVER_HOST` di `.env`):
+**Dari lokal** (tanpa perlu SSH manual - butuh `SERVER_HOST` di `.env`):
 
 ```bash
 make remote-update
@@ -365,7 +365,7 @@ SERVER_PATH=/var/www/sso
 - [ ] Buat OAuth client di dashboard → Quick Start panel muncul
 - [ ] Forgot password → email terkirim via Resend (pastikan `RESEND_API_KEY` diisi dan domain terverifikasi)
 - [ ] SSL aktif, tidak ada mixed content warning
-- [ ] `APP_DEBUG=false` di production — pastikan error tidak expose stack trace
+- [ ] `APP_DEBUG=false` di production - pastikan error tidak expose stack trace
 
 ---
 
@@ -380,6 +380,6 @@ SERVER_PATH=/var/www/sso
 | Assets tidak muncul | `npm run build` belum dijalankan |
 | Session tidak persist | Pastikan `SESSION_DRIVER=database` dan migration sessions sudah jalan |
 | CSS/JS tidak load | Pastikan `ASSET_URL` di `.env` sama dengan URL yang diakses (http vs https, domain vs IP) |
-| `composer install` gagal (PHP version) | Symfony 8.x butuh PHP >=8.4.1 — install PHP 8.4 dari ondrej PPA |
+| `composer install` gagal (PHP version) | Symfony 8.x butuh PHP >=8.4.1 - install PHP 8.4 dari ondrej PPA |
 | `psql: FATAL: password authentication failed for user postgres` | Set/reset password via `sudo -u postgres psql` lalu `ALTER USER postgres WITH PASSWORD '...';`, dan pastikan `DB_PASSWORD` di `.env` sama |
 | `config:cache` Permission denied | Jalankan sebagai www-data: `sudo -u www-data php artisan config:cache` |

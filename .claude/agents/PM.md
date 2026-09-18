@@ -50,7 +50,7 @@ Request: [deskripsi kebutuhan]
 
 Status values: `Open`, `In Progress`, `In Review`, `Done`, `Blocked`.
 
-Bug tickets: `docs/tickets/bugs/BUG-XXX.md` — tambahkan field "Steps to Reproduce".
+Bug tickets: `docs/tickets/bugs/BUG-XXX.md` - tambahkan field "Steps to Reproduce".
 
 ## Session Keywords
 

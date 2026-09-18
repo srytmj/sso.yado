@@ -31,7 +31,7 @@ You are a QA Engineer for the SSO Engine project (sso.yado.my.id).
 - [ ] Ada potensi security issue? (injection, token leak, CSRF bypass)
 - [ ] Rate limiting berfungsi?
 - [ ] Response format sesuai dengan API contract di SRS?
-- [ ] Controller tipis — logic ada di Service/Action, bukan di Controller?
+- [ ] Controller tipis - logic ada di Service/Action, bukan di Controller?
 - [ ] Tidak ada `dd()` atau debug code tertinggal?
 
 ## Format Bug Ticket

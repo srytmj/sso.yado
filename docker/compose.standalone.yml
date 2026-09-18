@@ -8,13 +8,13 @@ name: sso-yado
 #                            HTTPS via Let's Encrypt, tidak perlu setup manual apa pun
 #
 # PENTING: JANGAN taruh port di CADDY_SITE_ADDRESS (mis. "http://localhost:8080") kalau
-# HTTP_PORT sudah diganti dari default 80 — Caddy akan listen di port yang disebut DI
+# HTTP_PORT sudah diganti dari default 80 - Caddy akan listen di port yang disebut DI
 # DALAM alamat itu (jadi 8080 di dalam container), sementara mapping HTTP_PORT tetap
 # mengarah ke port 80 container. Ganti port host cukup lewat HTTP_PORT/HTTPS_PORT saja,
 # biarkan CADDY_SITE_ADDRESS tanpa port.
 #
 # Pakai: make docker-standalone-deploy (atau manual: docker compose -f
-# docker/compose.standalone.yml --project-directory . up -d --build — flag
+# docker/compose.standalone.yml --project-directory . up -d --build - flag
 # --project-directory WAJIB supaya semua path relatif di file ini tetap resolve ke
 # root repo, bukan ke folder docker/)
 
@@ -30,7 +30,7 @@ services:
       - ./.env:/var/www/html/.env
     env_file: .env
     environment:
-      # Project ini pakai read/write split (lihat config/database.php) — DB_HOST saja
+      # Project ini pakai read/write split (lihat config/database.php) - DB_HOST saja
       # tidak cukup, DB_READ_HOST/DB_WRITE_HOST eksplisit di .env akan menang atas
       # fallback ke DB_HOST kalau tidak di-override juga di sini.
       DB_HOST: postgres
@@ -65,7 +65,7 @@ services:
     restart: unless-stopped
     environment:
       # Beda dari MySQL: image Postgres resmi tidak punya konsep root+user terpisah,
-      # cuma 1 superuser yang dibuat dari POSTGRES_USER/POSTGRES_PASSWORD — jadi ini
+      # cuma 1 superuser yang dibuat dari POSTGRES_USER/POSTGRES_PASSWORD - jadi ini
       # HARUS sama persis dengan DB_USERNAME/DB_PASSWORD yang dipakai aplikasi.
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}

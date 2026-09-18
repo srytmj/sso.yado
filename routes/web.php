@@ -21,10 +21,10 @@ use App\Http\Controllers\HealthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-// Public — always accessible, navbar changes based on auth state
+// Public - always accessible, navbar changes based on auth state
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Health check buat monitoring eksternal (landing page Yado) — publik, tanpa
+// Health check buat monitoring eksternal (landing page Yado) - publik, tanpa
 // auth, query DB minimal (SELECT 1) supaya responsnya cepat. Beda dari /up bawaan
 // Laravel: endpoint ini bentuk JSON-nya khusus buat dikonsumsi dashboard monitoring.
 Route::get('/health', [HealthController::class, 'check'])->name('health')->middleware('throttle:60,1');
@@ -46,18 +46,18 @@ Route::middleware(['guest', 'throttle:60,1'])->group(function () {
     Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('password.update')->middleware('throttle:5,1');
 });
 
-// Two-factor challenge — user sudah lolos password tapi belum lolos TOTP, jadi bukan guest
+// Two-factor challenge - user sudah lolos password tapi belum lolos TOTP, jadi bukan guest
 // dan bukan authenticated penuh. Session key 'mfa_pending_user_id' yang jadi penanda.
 Route::middleware('throttle:5,1')->group(function () {
     Route::get('/two-factor-challenge', [TwoFactorChallengeController::class, 'show'])->name('two-factor.challenge');
     Route::post('/two-factor-challenge', [TwoFactorChallengeController::class, 'verify'])->name('two-factor.verify');
 });
 
-// Authenticated — throttle di-key per-user (bukan per-IP) karena semua route ini butuh login
+// Authenticated - throttle di-key per-user (bukan per-IP) karena semua route ini butuh login
 Route::middleware(['auth', 'throttle:120,1'])->group(function () {
     Route::match(['get', 'post'], '/logout', [LogoutController::class, 'destroy'])->name('logout');
 
-    // Email verification — TIDAK di-gate dengan 'verified' karena ini justru rute untuk
+    // Email verification - TIDAK di-gate dengan 'verified' karena ini justru rute untuk
     // user yang belum verified supaya bisa verifikasi/minta kirim ulang.
     Route::get('/email/verify', [VerificationController::class, 'notice'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
@@ -89,7 +89,7 @@ Route::middleware(['auth', 'throttle:120,1'])->group(function () {
             });
         });
 
-        // Dashboard — superadmin only
+        // Dashboard - superadmin only
         Route::middleware('superadmin')->prefix('dashboard')->name('dashboard.')->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('index');
 
@@ -119,6 +119,7 @@ Route::middleware(['auth', 'throttle:120,1'])->group(function () {
                 Route::get('/', [UserManagementController::class, 'index'])->name('index');
                 Route::patch('/{user}/toggle-active', [UserManagementController::class, 'toggleActive'])->name('toggle-active');
                 Route::patch('/{user}/role', [UserManagementController::class, 'assignRole'])->name('role');
+                Route::patch('/{user}/password', [UserManagementController::class, 'changePassword'])->name('password');
                 Route::get('/invite', [UserManagementController::class, 'invite'])->name('invite');
                 Route::post('/invite', [UserManagementController::class, 'sendInvite'])->name('send-invite')->middleware('throttle:10,1');
             });

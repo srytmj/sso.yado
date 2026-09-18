@@ -11,7 +11,7 @@ return [
     'delete_confirm' => 'クライアントを削除しすべてのトークンを無効化しますか？',
     'no_applications' => '登録されているアプリケーションはありません。',
 
-    'save_now_warning' => '今すぐ保存してください — 二度と表示されません',
+    'save_now_warning' => '今すぐ保存してください - 二度と表示されません',
     'client_id_label' => 'クライアントID',
     'client_secret_label' => 'クライアントシークレット',
     'env_snippet_label' => '.env スニペット',
@@ -21,7 +21,7 @@ return [
     'copied' => 'コピーしました！',
 
     'credentials_heading' => '認証情報',
-    'secret_hidden' => '非表示 — 作成時に一度だけ表示されます',
+    'secret_hidden' => '非表示 - 作成時に一度だけ表示されます',
     'redirect_uri_label' => 'リダイレクトURI',
     'edit_heading' => '編集',
     'name_label' => '名前',
@@ -36,7 +36,7 @@ return [
     'validate_invalid_format' => 'URIの形式が正しくありません',
     'validate_no_fragment' => 'リダイレクトURIにフラグメント（#）を含めることはできません',
     'validate_scheme_forbidden' => 'このスキームは許可されていません',
-    'validate_localhost_warning' => '開発用URI — 本番環境では必ず置き換えてください',
+    'validate_localhost_warning' => '開発用URI - 本番環境では必ず置き換えてください',
     'validate_https_required' => '公開ドメインにはHTTPSが必須です',
     'validate_valid' => '有効なURIです',
 ];

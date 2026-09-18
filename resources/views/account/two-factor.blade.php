@@ -18,7 +18,7 @@
         <hr class="border-base-300 my-4">
 
         @if($recoveryCodes)
-            {{-- Recovery codes — shown once --}}
+            {{-- Recovery codes - shown once --}}
             <div class="alert alert-warning alert-soft flex-col items-start mb-4">
                 <p class="text-xs font-semibold mb-1">{{ __('two_factor.recovery_codes_heading') }}</p>
                 <p class="text-xs mb-3">{{ __('two_factor.recovery_codes_warning') }}</p>
@@ -35,7 +35,7 @@
             <div class="max-w-sm">
                 <p class="text-sm font-medium text-base-content mb-1">{{ __('two_factor.setup_heading') }}</p>
                 <p class="text-xs text-base-content/60 mb-4">{{ __('two_factor.setup_instruction') }}</p>
-                {{-- bg-white sengaja fixed (bukan token daisyUI) — QR code butuh kontras hitam-di-atas-putih
+                {{-- bg-white sengaja fixed (bukan token daisyUI) - QR code butuh kontras hitam-di-atas-putih
                      yang konsisten supaya kamera authenticator app bisa scan dengan andal --}}
                 <div class="bg-white p-4 rounded-lg border border-base-300 inline-block mb-3">
                     {!! $qrCodeSvg !!}

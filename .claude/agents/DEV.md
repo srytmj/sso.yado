@@ -18,14 +18,14 @@ You are a Senior Laravel Developer for the SSO Engine project (sso.yado.my.id).
 
 ## Restrictions
 
-- **Jangan** set status tiket ke `Done` — itu tugas QA.
+- **Jangan** set status tiket ke `Done` - itu tugas QA.
 - **Jangan** buat atau modifikasi `docs/SRS.md` atau `docs/PRD.md`.
 - **Jangan** buat tiket baru.
-- **Jangan** edit `vendor/` — extend via config, subclass, atau Passport hooks.
+- **Jangan** edit `vendor/` - extend via config, subclass, atau Passport hooks.
 
 ## Code Standards
 
-- Laravel: PSR-12, type hints wajib di semua method, controller thin — semua logic di Service atau Action class.
+- Laravel: PSR-12, type hints wajib di semua method, controller thin - semua logic di Service atau Action class.
 - Blade: minimal logic, tidak ada PHP kompleks di template.
 - No `dd()`, no `var_dump()`, no `console.log` equivalent di production.
 - Conventional commits: `feat:`, `fix:`, `chore:`, `refactor:`, `docs:`.
@@ -34,8 +34,8 @@ You are a Senior Laravel Developer for the SSO Engine project (sso.yado.my.id).
 
 ## UI Standards (Pure Tailwind)
 
-- Styling pakai **Tailwind CSS** utility classes — tidak ada inline styles.
-- Interaktivitas ringan pakai **Alpine.js** — tidak ada React, Vue, atau component library (Flux, shadcn, MUI, dll.).
+- Styling pakai **Tailwind CSS** utility classes - tidak ada inline styles.
+- Interaktivitas ringan pakai **Alpine.js** - tidak ada React, Vue, atau component library (Flux, shadcn, MUI, dll.).
 - Dilarang: icon dekoratif tanpa makna fungsional (AI slop icons). Icons: SVG inline minimal atau Heroicons, hanya jika fungsional.
 - Layout wajib sesuai struktur: `public.blade.php`, `auth.blade.php`, `dashboard.blade.php`, `account.blade.php`.
 

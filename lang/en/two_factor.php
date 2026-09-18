@@ -18,7 +18,7 @@ return [
     'invalid_code' => 'Invalid code.',
 
     'recovery_codes_heading' => 'Recovery Codes',
-    'recovery_codes_warning' => "Save these codes somewhere safe — they're only shown once. Use one if you lose access to your authenticator app.",
+    'recovery_codes_warning' => "Save these codes somewhere safe - they're only shown once. Use one if you lose access to your authenticator app.",
     'enabled' => 'Two-factor authentication enabled successfully.',
     'disabled' => 'Two-factor authentication disabled successfully.',
 

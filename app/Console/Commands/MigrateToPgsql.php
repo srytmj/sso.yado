@@ -31,7 +31,7 @@ class MigrateToPgsql extends Command
     ];
 
     /**
-     * Kolom boolean per tabel — MySQL PDO mengembalikan "0"/"1" string, kolom
+     * Kolom boolean per tabel - MySQL PDO mengembalikan "0"/"1" string, kolom
      * boolean Postgres butuh true/false asli.
      */
     private const BOOLEAN_COLUMNS = [

@@ -18,7 +18,7 @@ return [
     'invalid_code' => 'Kode tidak valid.',
 
     'recovery_codes_heading' => 'Recovery Codes',
-    'recovery_codes_warning' => 'Simpan kode ini di tempat aman — hanya ditampilkan sekali. Gunakan salah satu jika kamu kehilangan akses ke aplikasi authenticator.',
+    'recovery_codes_warning' => 'Simpan kode ini di tempat aman - hanya ditampilkan sekali. Gunakan salah satu jika kamu kehilangan akses ke aplikasi authenticator.',
     'enabled' => 'Two-factor authentication berhasil diaktifkan.',
     'disabled' => 'Two-factor authentication berhasil dinonaktifkan.',
 

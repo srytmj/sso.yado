@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', __('common.app_name') . ' — yado')</title>
+    <link rel="icon" href="{{ asset('favicon.svg') }}">
+    <title>@yield('title', __('common.app_name') . ' - yado')</title>
     @include('partials.theme-init', ['theme' => auth()->user()?->theme])
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-base-100 text-base-content flex flex-col relative overflow-x-hidden">
-    {{-- Blob gradient dekoratif di background — dasar buat efek kaca (backdrop-blur)
+    {{-- Blob gradient dekoratif di background - dasar buat efek kaca (backdrop-blur)
          di card/badge atasnya kelihatan, bukan cuma transparan ke warna polos. --}}
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
         <div class="absolute -top-32 -left-24 w-96 h-96 bg-primary/30 rounded-full blur-3xl"></div>

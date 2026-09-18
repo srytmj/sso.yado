@@ -7,7 +7,7 @@ SERVER_PATH ?= /var/www/sso
 
 # docker/compose.prod.yml dan docker/compose.standalone.yml hidup di dalam docker/,
 # tapi semua path relatif di dalamnya (env_file, volumes, build context) tetap ditulis
-# seolah-olah relatif ke root repo — --project-directory . yang bikin itu valid tanpa
+# seolah-olah relatif ke root repo - --project-directory . yang bikin itu valid tanpa
 # perlu ubah isi file compose sama sekali.
 PROD_COMPOSE := docker compose -f docker/compose.prod.yml --project-directory .
 STANDALONE_COMPOSE := docker compose -f docker/compose.standalone.yml --project-directory .
@@ -40,7 +40,7 @@ help:
 	@echo "  make docker-prod-logs    Tail log container production"
 	@echo "  make docker-prod-shell   Masuk shell container app production"
 	@echo ""
-	@echo "  -- Docker Standalone (universal — testing lokal ATAU deploy publik, tanpa Traefik) --"
+	@echo "  -- Docker Standalone (universal - testing lokal ATAU deploy publik, tanpa Traefik) --"
 	@echo "  make docker-standalone-deploy  First-time deploy: build + up + migrate + seed"
 	@echo "  make docker-standalone-update  Update: pull + rebuild + migrate (data aman)"
 	@echo "  make docker-standalone-down    Stop container"

@@ -1,14 +1,14 @@
 import { animate, stagger, eases } from 'animejs'
 
 /**
- * Micro-interaction global pakai anime.js — dipasang sekali di app.js, otomatis
+ * Micro-interaction global pakai anime.js - dipasang sekali di app.js, otomatis
  * jalan di semua halaman tanpa perlu ubah tiap file Blade. CSS transition di
  * app.css tetap ada buat warna/border (murah, selalu jalan), animasi JS di sini
  * khusus buat gerakan yang kerasa "hidup": tombol yang mantul pas ditekan, dan
  * kartu/alert yang masuk dengan stagger pas halaman dimuat.
  *
  * Easing pakai fungsi dari `eases` (bukan string berparameter kayak
- * 'outElastic(1, .6)') — lebih aman, gak gantung ke string-parsing internal
+ * 'outElastic(1, .6)') - lebih aman, gak gantung ke string-parsing internal
  * anime.js buat argumen ease dengan parameter custom.
  */
 

@@ -84,14 +84,14 @@
 }
 
 /*
- * Micro-interactions global — supaya UI kerasa hidup, bukan statis. Dua lapis:
+ * Micro-interactions global - supaya UI kerasa hidup, bukan statis. Dua lapis:
  *
- * 1. CSS (di sini) — murah, selalu jalan tanpa nunggu JS load: transisi warna/
+ * 1. CSS (di sini) - murah, selalu jalan tanpa nunggu JS load: transisi warna/
  *    border/shadow yang halus di semua elemen, plus hover-lift di tiap `.card`.
- * 2. JS (resources/js/animate.js, pakai anime.js) — gerakan yang beneran kerasa:
+ * 2. JS (resources/js/animate.js, pakai anime.js) - gerakan yang beneran kerasa:
  *    tombol yang "mantul" pas ditekan (spring/elastic, bukan cuma fade), dan
  *    kartu/alert yang masuk dengan stagger pas halaman dimuat. `.animate-fade-in`
- *    dkk di bawah ini SENGAJA tanpa animasi CSS — elemen itu di-animate dari JS
+ *    dkk di bawah ini SENGAJA tanpa animasi CSS - elemen itu di-animate dari JS
  *    (anime.js set nilai awal opacity/transform sendiri sebelum animasi jalan),
  *    kalau JS gagal load elemen tetap kelihatan normal (aman, bukan ke-hide).
  */

@@ -44,7 +44,7 @@
             </div>
             <div>
                 <p class="text-xs text-base-content/40 mb-1">{{ __('account.role') }}</p>
-                <span class="badge badge-neutral badge-soft">{{ $user->role->name ?? '—' }}</span>
+                <span class="badge badge-neutral badge-soft">{{ $user->role->name ?? '-' }}</span>
             </div>
             <div>
                 <p class="text-xs text-base-content/40 mb-1">{{ __('account.email_verification') }}</p>

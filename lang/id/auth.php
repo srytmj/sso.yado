@@ -3,7 +3,7 @@
 return [
     'login_title' => 'Masuk',
     'login_intent_app' => 'Masuk untuk melanjutkan ke :app',
-    'login_intent_default' => 'Akses aplikasi yado melalui masing-masing aplikasi — kamu akan diarahkan ke sini otomatis.',
+    'login_intent_default' => 'Akses aplikasi yado melalui masing-masing aplikasi - kamu akan diarahkan ke sini otomatis.',
     'email_or_username' => 'Email atau Username',
     'password' => 'Password',
     'remember_me' => 'Ingat saya',

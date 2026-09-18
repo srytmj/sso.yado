@@ -1,4 +1,4 @@
-# TASK-016: Register — Full Name Opsional (Fallback ke Username)
+# TASK-016: Register - Full Name Opsional (Fallback ke Username)
 
 Status: Done
 Priority: Low
@@ -11,10 +11,10 @@ Depends on: TASK-003
 
 ## DEV Response
 
-- [x] `RegisterController`: ubah validasi `name` dari `required` → `nullable|string|max:255` — `app/Http/Controllers/Auth/RegisterController.php:24`
-- [x] `RegisterService`: tambah logic `filled($data['name'] ?? null) ? $data['name'] : $data['username']` — `app/Services/Auth/RegisterService.php:16`
+- [x] `RegisterController`: ubah validasi `name` dari `required` → `nullable|string|max:255` - `app/Http/Controllers/Auth/RegisterController.php:24`
+- [x] `RegisterService`: tambah logic `filled($data['name'] ?? null) ? $data['name'] : $data['username']` - `app/Services/Auth/RegisterService.php:16`
 - [x] `resources/views/auth/register.blade.php`: label "Full Name" + badge `<span>` "opsional" (pure Tailwind), placeholder "Kosongkan untuk pakai username"
-- [x] Sekalian: redirect post-register ke `/account` (user) atau `/dashboard` (superadmin), konsisten dengan post-login — `RegisterController:32-35`
+- [x] Sekalian: redirect post-register ke `/account` (user) atau `/dashboard` (superadmin), konsisten dengan post-login - `RegisterController:32-35`
 
 ---
 
@@ -25,7 +25,7 @@ Depends on: TASK-003
 - [x] Register dengan full name diisi → `filled($data['name'] ?? null)` true → simpan `$data['name']` ✓ (`RegisterService:16`)
 - [x] Register dengan full name kosong (`name=''`) → `filled('')` false → fallback ke `$data['username']` ✓
 - [x] Register dengan full name hanya spasi → `filled('   ')` false (Laravel `blank()` menganggap whitespace-only sebagai blank) → fallback ke username ✓
-- [x] Validasi lain tidak terpengaruh — `nullable` hanya mengubah `name`, aturan username/email/password tidak berubah ✓
+- [x] Validasi lain tidak terpengaruh - `nullable` hanya mengubah `name`, aturan username/email/password tidak berubah ✓
 - [x] View: label "Full Name" + badge "opsional" + placeholder "Kosongkan untuk pakai username" ✓ (`register.blade.php:12-18`)
 - [x] Redirect post-register: `route('account.show')` atau `route('dashboard.index')` untuk superadmin ✓ (`RegisterController:36-40`)
 

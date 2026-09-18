@@ -7,7 +7,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Role 'admin' tidak digunakan — hanya 'user' dan 'superadmin'
+        // Role 'admin' tidak digunakan - hanya 'user' dan 'superadmin'
         // User yang punya role admin di-reassign ke 'user' sebelum dihapus
         $adminRole = DB::table('roles')->where('slug', 'admin')->first();
 

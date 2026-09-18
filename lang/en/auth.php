@@ -3,7 +3,7 @@
 return [
     'login_title' => 'Sign In',
     'login_intent_app' => 'Sign in to continue to :app',
-    'login_intent_default' => 'Access yado apps from each app — you\'ll be redirected here automatically.',
+    'login_intent_default' => 'Access yado apps from each app - you\'ll be redirected here automatically.',
     'email_or_username' => 'Email or Username',
     'password' => 'Password',
     'remember_me' => 'Remember me',

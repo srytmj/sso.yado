@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-echo "=== SSO Engine — Deploy ==="
+echo "=== SSO Engine - Deploy ==="
 
 # Setup .env jika belum ada
 if [ ! -f .env ]; then
@@ -29,7 +29,7 @@ composer install --no-dev --optimize-autoloader
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
-# Migrate fresh — drop semua table dan recreate dari awal
+# Migrate fresh - drop semua table dan recreate dari awal
 php artisan migrate:fresh --force
 
 # Symlink storage/app/public -> public/storage (dibutuhkan untuk avatar upload disk lokal)
@@ -41,7 +41,7 @@ php artisan passport:keys --force
 # Seed roles + admin user
 php artisan db:seed --force
 
-# Optimize — jalankan sebagai www-data agar file cache writable oleh Nginx
+# Optimize - jalankan sebagai www-data agar file cache writable oleh Nginx
 sudo -u www-data php artisan config:cache
 sudo -u www-data php artisan route:cache
 sudo -u www-data php artisan view:cache

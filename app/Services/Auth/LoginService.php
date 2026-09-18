@@ -37,7 +37,7 @@ class LoginService
 
         if (! $user->is_active) {
             Auth::logout();
-            $this->auditLog->record('auth.login_failed', 'Login ditolak — akun tidak aktif', $user);
+            $this->auditLog->record('auth.login_failed', 'Login ditolak - akun tidak aktif', $user);
 
             throw ValidationException::withMessages([
                 'email' => ['Akun Anda tidak aktif.'],

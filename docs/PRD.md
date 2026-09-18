@@ -1,20 +1,20 @@
-# PRD — SSO Engine (sso.yado.my.id)
+# PRD - SSO Engine (sso.yado.my.id)
 
 ## Problem Statement
 
-Project Yado terdiri dari beberapa microservice dan aplikasi (saat ini: Malas, Scribe) yang masing-masing butuh autentikasi. Tanpa identity provider terpusat, setiap app harus maintain auth stack sendiri — duplikasi kode, user harus login ulang per app, dan session management tersebar. SSO Engine adalah salah satu microservice dari Yado yang menyelesaikan masalah ini dengan menyediakan satu titik autentikasi OAuth2 untuk seluruh ekosistem Yado.my.id.
+Project Yado terdiri dari beberapa microservice dan aplikasi (saat ini: Malas, Scribe) yang masing-masing butuh autentikasi. Tanpa identity provider terpusat, setiap app harus maintain auth stack sendiri - duplikasi kode, user harus login ulang per app, dan session management tersebar. SSO Engine adalah salah satu microservice dari Yado yang menyelesaikan masalah ini dengan menyediakan satu titik autentikasi OAuth2 untuk seluruh ekosistem Yado.my.id.
 
 ## Target Users
 
-**End users** — individu yang punya akun yado.my.id dan mengakses satu atau lebih aplikasi dalam ekosistem.
+**End users** - individu yang punya akun yado.my.id dan mengakses satu atau lebih aplikasi dalam ekosistem.
 
-**Superadmin** — pengelola ekosistem yang manage user accounts dan registered OAuth client apps.
+**Superadmin** - pengelola ekosistem yang manage user accounts dan registered OAuth client apps.
 
-**Client app developers** — tim internal yang membangun aplikasi baru dalam ekosistem dan perlu integrasi auth.
+**Client app developers** - tim internal yang membangun aplikasi baru dalam ekosistem dan perlu integrasi auth.
 
 ## Scope
 
-Project ini membangun Central SSO Engine (`sso.yado.my.id`) beserta dashboard pengelolaan. Aplikasi-aplikasi klien (Malas, Scribe, dst.) adalah **konsumer** dari SSO ini — mereka tidak dibangun di sini. Arsitektur OAuth2 + PKCE dipilih karena ekosistem akan terus berkembang dan setiap app baru cukup daftar sebagai OAuth client.
+Project ini membangun Central SSO Engine (`sso.yado.my.id`) beserta dashboard pengelolaan. Aplikasi-aplikasi klien (Malas, Scribe, dst.) adalah **konsumer** dari SSO ini - mereka tidak dibangun di sini. Arsitektur OAuth2 + PKCE dipilih karena ekosistem akan terus berkembang dan setiap app baru cukup daftar sebagai OAuth client.
 
 ## Core User Stories
 
@@ -22,13 +22,13 @@ Project ini membangun Central SSO Engine (`sso.yado.my.id`) beserta dashboard pe
 - Saya ingin login sekali di sso.yado.my.id, sehingga bisa langsung masuk ke semua app ekosistem tanpa login ulang.
 - Saya ingin register akun baru langsung di sso.yado.my.id, tanpa harus membuka Malas atau Scribe terlebih dahulu.
 - Ketika session masih aktif dan app client redirect ke SSO, saya ingin langsung diteruskan ke app tanpa input password lagi (silent SSO).
-- Saya ingin melihat halaman profil akun saya — info akun, status verifikasi, ganti password, dan daftar session aktif.
+- Saya ingin melihat halaman profil akun saya - info akun, status verifikasi, ganti password, dan daftar session aktif.
 - Saya ingin bisa mencabut session dari device asing yang tidak saya kenali.
 
 ### Superadmin
-- Saya ingin melihat dan mengelola semua user account — aktifkan/nonaktifkan, assign role.
+- Saya ingin melihat dan mengelola semua user account - aktifkan/nonaktifkan, assign role.
 - Saya ingin mengundang user baru via email (bukan register mandiri).
-- Saya ingin mengelola registered OAuth client apps — tambah, edit, lihat credentials (client_id/secret), hapus.
+- Saya ingin mengelola registered OAuth client apps - tambah, edit, lihat credentials (client_id/secret), hapus.
 - Saya ingin bisa me-revoke OAuth client tertentu tanpa harus menyentuh database.
 
 ### Client App
@@ -38,22 +38,22 @@ Project ini membangun Central SSO Engine (`sso.yado.my.id`) beserta dashboard pe
 
 ## Features
 
-### P0 — Done ✓
+### P0 - Done ✓
 
-- **Register lokal**: form register dengan name, username, email, password — accessible langsung di `/register`
+- **Register lokal**: form register dengan name, username, email, password - accessible langsung di `/register`
 - **Login lokal**: form login dengan email + password, session berbasis cookie
 - **Login context banner**: saat login via OAuth flow, tampilkan nama app yang meminta akses; saat akses langsung, tampilkan notice arahan
 - **OAuth2 Authorization Code + PKCE**: endpoint `/oauth/authorize`, `/oauth/token`
 - **Silent SSO**: jika session aktif saat `/oauth/authorize` dipanggil, langsung redirect dengan code
 - **Auto-approve consent**: client first-party trusted, tidak perlu confirm consent screen
-- **Userinfo endpoint**: `GET /api/user` — return profile berdasarkan access token (Bearer)
+- **Userinfo endpoint**: `GET /api/user` - return profile berdasarkan access token (Bearer)
 - **Refresh token flow**: client dapat refresh access token tanpa interaksi user
 - **Scope-based authorization**: scope awal `profile:read`
 - **Token revocation**: logout revoke session dan semua token aktif
 
-### P1 — Done ✓
+### P1 - Done ✓
 
-- **Landing page** (`/`): halaman publik yang menjelaskan SSO Engine — OAuth2 + PKCE, self-service register, ekosistem Yado.my.id. Tautan ke `/login` dan `/register`.
+- **Landing page** (`/`): halaman publik yang menjelaskan SSO Engine - OAuth2 + PKCE, self-service register, ekosistem Yado.my.id. Tautan ke `/login` dan `/register`.
 - **My Account** (`/account`): halaman self-service untuk user yang sudah login
   - Info akun: name, username, email, avatar, role, status verifikasi email
   - Ganti password
@@ -66,13 +66,13 @@ Project ini membangun Central SSO Engine (`sso.yado.my.id`) beserta dashboard pe
 - **Forgot password**: user input email → link reset via Resend, expired 60 menit, single-use
 - **Register full name opsional**: jika kosong, fallback ke username
 
-### P2 — Should Have (Next)
+### P2 - Should Have (Next)
 
 - **Avatar upload**
 - **Audit log** login events (siapa login kapan, dari mana)
-- **Email verification** — verifikasi email setelah register
+- **Email verification** - verifikasi email setelah register
 
-### P3 — Nice to Have
+### P3 - Nice to Have
 
 - **Multi-factor authentication (TOTP)**
 - **Webhook** notifikasi ke client app saat user di-deactivate

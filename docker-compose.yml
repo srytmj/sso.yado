@@ -10,7 +10,7 @@ services:
       - ./.env:/var/www/html/.env
       - sso_public:/var/www/html/public
     environment:
-      # Project ini pakai read/write split (lihat config/database.php) — DB_HOST saja
+      # Project ini pakai read/write split (lihat config/database.php) - DB_HOST saja
       # tidak cukup, DB_READ_HOST/DB_WRITE_HOST eksplisit di .env akan menang atas
       # fallback ke DB_HOST kalau tidak di-override juga di sini.
       DB_HOST: postgres

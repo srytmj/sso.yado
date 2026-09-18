@@ -24,10 +24,10 @@
     <button type="button" @click="cycle()"
             :title="theme === 'system' ? '{{ __('common.theme_system') }}' : (theme === 'light' ? '{{ __('common.theme_light') }}' : '{{ __('common.theme_dark') }}')"
             class="btn btn-ghost btn-square btn-sm">
-        {{-- Wrapper posisi relatif ukuran tetap — icon di-stack absolute di dalamnya
+        {{-- Wrapper posisi relatif ukuran tetap - icon di-stack absolute di dalamnya
              supaya crossfade gak nabrak/nge-reflow tombol pas ganti icon. x-show/
              x-transition/transform dipasang di <span> (elemen HTML), bukan langsung
-             di <svg> — properti transform individual (scale/rotate) kadang gak
+             di <svg> - properti transform individual (scale/rotate) kadang gak
              konsisten kalau ditempel langsung ke elemen SVG. --}}
         <span x-cloak class="relative w-4 h-4 inline-block">
             <span x-show="theme === 'system'"

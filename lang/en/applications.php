@@ -11,7 +11,7 @@ return [
     'delete_confirm' => 'Delete client and revoke all tokens?',
     'no_applications' => 'No applications registered.',
 
-    'save_now_warning' => 'Save now — cannot be viewed again',
+    'save_now_warning' => 'Save now - cannot be viewed again',
     'client_id_label' => 'Client ID',
     'client_secret_label' => 'Client Secret',
     'env_snippet_label' => '.env snippet',
@@ -21,7 +21,7 @@ return [
     'copied' => 'Copied!',
 
     'credentials_heading' => 'Credentials',
-    'secret_hidden' => 'Hidden — only shown once at creation',
+    'secret_hidden' => 'Hidden - only shown once at creation',
     'redirect_uri_label' => 'Redirect URI',
     'edit_heading' => 'Edit',
     'name_label' => 'Name',
@@ -36,7 +36,7 @@ return [
     'validate_invalid_format' => 'Invalid URI format',
     'validate_no_fragment' => 'Redirect URI must not contain a fragment (#)',
     'validate_scheme_forbidden' => 'Scheme not allowed',
-    'validate_localhost_warning' => 'Development URI — make sure it is replaced in production',
+    'validate_localhost_warning' => 'Development URI - make sure it is replaced in production',
     'validate_https_required' => 'HTTPS is required for public domains',
     'validate_valid' => 'Valid URI',
 ];

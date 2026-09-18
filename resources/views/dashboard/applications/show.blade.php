@@ -4,7 +4,7 @@
 
 @section('content')
     @if(session('new_secret'))
-        {{-- Quick Start Panel — only shown once after creation --}}
+        {{-- Quick Start Panel - only shown once after creation --}}
         <div class="mb-6 animate-slide-up" x-data="{
             clientId: '{{ $client->id }}',
             secret: '{{ session('new_secret') }}',

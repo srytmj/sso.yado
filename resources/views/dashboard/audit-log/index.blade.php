@@ -100,7 +100,7 @@
                                 </td>
                                 <td class="text-base-content">{{ $entry->description }}</td>
                                 <td class="text-base-content/60 hidden md:table-cell">{{ $entry->actor?->name ?? __('audit.system') }}</td>
-                                <td class="text-base-content/60 hidden lg:table-cell font-mono text-xs">{{ $entry->ip_address ?? '—' }}</td>
+                                <td class="text-base-content/60 hidden lg:table-cell font-mono text-xs">{{ $entry->ip_address ?? '-' }}</td>
                             </tr>
                         @endforeach
                     </tbody>

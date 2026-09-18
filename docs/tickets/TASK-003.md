@@ -28,7 +28,7 @@ Depends on: TASK-002
 - [x] CSRF middleware aktif di semua route web (Laravel default)
 
 **Logout:**
-- [x] `LogoutController`: `destroy()` — `Auth::logout()`, invalidate session, regenerate CSRF token, redirect ke `/login`
+- [x] `LogoutController`: `destroy()` - `Auth::logout()`, invalidate session, regenerate CSRF token, redirect ke `/login`
 
 **Routes (web.php):**
 - [x] `GET /login`, `POST /login` (throttle:5,1)
@@ -37,7 +37,7 @@ Depends on: TASK-002
 - [x] Middleware `guest` untuk login dan register
 
 **Layout:**
-- [x] `resources/views/layouts/auth.blade.php` — base layout dengan Tailwind CDN
+- [x] `resources/views/layouts/auth.blade.php` - base layout dengan Tailwind CDN
 
 ---
 
@@ -45,20 +45,20 @@ Depends on: TASK-002
 
 > **Method**: Static code review.
 
-- [x] Register dengan data valid → user tersimpan, session terbentuk, redirect ke `/` — `RegisterController::store()` memanggil `RegisterService::register()`, `Auth::login()`, `session()->regenerate()`, `redirect()->intended('/')` ✓
-- [x] Register dengan email duplikat → validation error — `unique:users,email` rule di `RegisterController:26` ✓
-- [x] Register dengan username yang sudah ada → validation error — `unique:users,username` rule di `RegisterController:25` ✓
-- [x] Login dengan kredensial benar → session terbentuk, redirect ke intended URL — `LoginService::attempt()` + `redirect()->intended('/')` ✓
-- [x] Login dengan password salah → error message, tidak ada session — `Auth::attempt()` fail → `ValidationException` di `LoginService:18` ✓
-- [x] Login dengan user `is_active = false` → error "Akun Anda tidak aktif." — VERIFIED di `LoginService:26-30`: Auth::logout() dipanggil, ValidationException dengan pesan tepat ✓
-- [x] POST /login lebih dari 5x gagal dalam 1 menit → HTTP 429 — `throttle:5,1` di `routes/web.php:10` ✓
-- [x] CSRF token missing di form POST → HTTP 419 — Laravel default CSRF middleware aktif ✓
-- [x] Akses `/login` saat sudah login → redirect — `middleware('guest')` di route group `routes/web.php:8` ✓
-- [x] POST /logout → session hancur, redirect ke `/login` — `LogoutController::destroy()`: `Auth::logout()`, `invalidate()`, `regenerateToken()`, `redirect()->route('login')` ✓
+- [x] Register dengan data valid → user tersimpan, session terbentuk, redirect ke `/` - `RegisterController::store()` memanggil `RegisterService::register()`, `Auth::login()`, `session()->regenerate()`, `redirect()->intended('/')` ✓
+- [x] Register dengan email duplikat → validation error - `unique:users,email` rule di `RegisterController:26` ✓
+- [x] Register dengan username yang sudah ada → validation error - `unique:users,username` rule di `RegisterController:25` ✓
+- [x] Login dengan kredensial benar → session terbentuk, redirect ke intended URL - `LoginService::attempt()` + `redirect()->intended('/')` ✓
+- [x] Login dengan password salah → error message, tidak ada session - `Auth::attempt()` fail → `ValidationException` di `LoginService:18` ✓
+- [x] Login dengan user `is_active = false` → error "Akun Anda tidak aktif." - VERIFIED di `LoginService:26-30`: Auth::logout() dipanggil, ValidationException dengan pesan tepat ✓
+- [x] POST /login lebih dari 5x gagal dalam 1 menit → HTTP 429 - `throttle:5,1` di `routes/web.php:10` ✓
+- [x] CSRF token missing di form POST → HTTP 419 - Laravel default CSRF middleware aktif ✓
+- [x] Akses `/login` saat sudah login → redirect - `middleware('guest')` di route group `routes/web.php:8` ✓
+- [x] POST /logout → session hancur, redirect ke `/login` - `LogoutController::destroy()`: `Auth::logout()`, `invalidate()`, `regenerateToken()`, `redirect()->route('login')` ✓
 
 **Additional checks:**
-- [x] Controller thin — logic di LoginService & RegisterService, bukan Controller ✓
+- [x] Controller thin - logic di LoginService & RegisterService, bukan Controller ✓
 - [x] Tidak ada `dd()` atau debug code ✓
-- [x] `POST /register` tidak punya throttle — SRS tidak mensyaratkan, aman untuk saat ini ✓
+- [x] `POST /register` tidak punya throttle - SRS tidak mensyaratkan, aman untuk saat ini ✓
 
 **Status: Done**

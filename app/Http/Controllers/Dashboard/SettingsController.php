@@ -69,8 +69,8 @@ class SettingsController extends Controller
             'test_email' => ['required', 'email'],
         ]);
 
-        Mail::raw('Test email dari SSO Engine — konfigurasi mail kamu berhasil.', function ($message) use ($validated) {
-            $message->to($validated['test_email'])->subject('SSO Engine — Test Email');
+        Mail::raw('Test email dari SSO Engine - konfigurasi mail kamu berhasil.', function ($message) use ($validated) {
+            $message->to($validated['test_email'])->subject('SSO Engine - Test Email');
         });
 
         return back()->with('success', __('settings.test_email_sent', ['email' => $validated['test_email']]));

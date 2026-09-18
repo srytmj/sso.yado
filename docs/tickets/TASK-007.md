@@ -11,15 +11,15 @@ Depends on: TASK-004
 
 ## DEV Response
 
-- [x] Refresh Token grant aktif by default di Passport — tidak ada konfigurasi tambahan
+- [x] Refresh Token grant aktif by default di Passport - tidak ada konfigurasi tambahan
 - [x] TTL dikonfigurasi di `AppServiceProvider`:
   ```php
   Passport::tokensExpireIn(now()->addMinutes(60));
   Passport::refreshTokensExpireIn(now()->addDays(30));
   ```
-- [x] Response POST `/oauth/token` (authorization code grant) menyertakan `refresh_token` — Passport default behavior, verified
-- [x] Refresh token lama di-revoke setelah digunakan — Passport/league-oauth2-server default behavior (rotation)
-- [x] Tidak ada kode tambahan diperlukan — semua dihandle Passport
+- [x] Response POST `/oauth/token` (authorization code grant) menyertakan `refresh_token` - Passport default behavior, verified
+- [x] Refresh token lama di-revoke setelah digunakan - Passport/league-oauth2-server default behavior (rotation)
+- [x] Tidak ada kode tambahan diperlukan - semua dihandle Passport
 
 **Refresh flow request:**
 ```
@@ -39,12 +39,12 @@ scope=profile:read
 
 > **Method**: Static code review. Semua behavior ini dihandle Passport/league-oauth2-server secara internal.
 
-- [x] POST `/oauth/token` `grant_type=refresh_token` → `access_token` baru + `refresh_token` baru — Passport Refresh Token grant built-in ✓
-- [x] Refresh token lama setelah digunakan → ditolak (single-use) — league-oauth2-server default: rotation on use ✓
-- [x] Refresh token expired (> 30 hari) → `invalid_grant` — `Passport::refreshTokensExpireIn(now()->addDays(30))` di `AppServiceProvider:33` ✓
-- [x] Refresh token dengan `client_id` salah → `invalid_client` — league-oauth2-server client validation ✓
-- [x] Access token baru dari refresh punya expire 3600 detik — TTL 60 menit dikonfigurasi di `AppServiceProvider:32` ✓
-- [x] Scope tidak bisa diupgrade via refresh — Passport built-in: scope pada refresh dibatasi ke scope original ✓
+- [x] POST `/oauth/token` `grant_type=refresh_token` → `access_token` baru + `refresh_token` baru - Passport Refresh Token grant built-in ✓
+- [x] Refresh token lama setelah digunakan → ditolak (single-use) - league-oauth2-server default: rotation on use ✓
+- [x] Refresh token expired (> 30 hari) → `invalid_grant` - `Passport::refreshTokensExpireIn(now()->addDays(30))` di `AppServiceProvider:33` ✓
+- [x] Refresh token dengan `client_id` salah → `invalid_client` - league-oauth2-server client validation ✓
+- [x] Access token baru dari refresh punya expire 3600 detik - TTL 60 menit dikonfigurasi di `AppServiceProvider:32` ✓
+- [x] Scope tidak bisa diupgrade via refresh - Passport built-in: scope pada refresh dibatasi ke scope original ✓
 
 **Note runtime**: Seluruh test case ini perlu konfirmasi HTTP di environment yang kompatibel.
 

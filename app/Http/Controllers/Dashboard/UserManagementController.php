@@ -61,4 +61,15 @@ class UserManagementController extends Controller
         return redirect()->route('dashboard.users.index')
             ->with('success', "Undangan dikirim ke {$validated['email']}.");
     }
+
+    public function changePassword(Request $request, User $user): RedirectResponse
+    {
+        $validated = $request->validate([
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $this->service->changeUserPassword($user, $validated['new_password']);
+
+        return back()->with('success', "Password untuk user {$user->name} berhasil diubah.");
+    }
 }

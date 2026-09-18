@@ -1,8 +1,8 @@
-# API Reference — SSO Engine (sso.yado.my.id)
+# API Reference - SSO Engine (sso.yado.my.id)
 
 Referensi teknis semua endpoint HTTP yang dipanggil programmatically (bukan halaman Blade). Untuk panduan integrasi step-by-step, lihat [docs/INTEGRATION.md](INTEGRATION.md) atau [docs/AI_INTEGRATION.md](AI_INTEGRATION.md).
 
-**Base URL**: `https://sso.yado.my.id` (production) — sesuaikan dengan `APP_URL` di environment kamu.
+**Base URL**: `https://sso.yado.my.id` (production) - sesuaikan dengan `APP_URL` di environment kamu.
 
 ---
 
@@ -10,8 +10,8 @@ Referensi teknis semua endpoint HTTP yang dipanggil programmatically (bukan hala
 
 Ada dua model auth berbeda di project ini, jangan tertukar:
 
-- **OAuth2 Bearer token** (`Authorization: Bearer <access_token>`) — dipakai client app buat memanggil `GET /api/user` setelah user selesai login lewat `/oauth/authorize`. Didapat lewat token exchange di `/oauth/token`.
-- **Session cookie** (login web biasa) — dipakai untuk semua halaman Blade (`/login`, `/account/*`, `/dashboard/*`). Bukan cakupan dokumen ini karena bukan API, tapi endpoint session-based yang dipanggil via `fetch()` dari halaman sendiri (`POST /account/theme`, dst.) tetap butuh session cookie + CSRF token, bukan Bearer token.
+- **OAuth2 Bearer token** (`Authorization: Bearer <access_token>`) - dipakai client app buat memanggil `GET /api/user` setelah user selesai login lewat `/oauth/authorize`. Didapat lewat token exchange di `/oauth/token`.
+- **Session cookie** (login web biasa) - dipakai untuk semua halaman Blade (`/login`, `/account/*`, `/dashboard/*`). Bukan cakupan dokumen ini karena bukan API, tapi endpoint session-based yang dipanggil via `fetch()` dari halaman sendiri (`POST /account/theme`, dst.) tetap butuh session cookie + CSRF token, bukan Bearer token.
 
 ---
 
@@ -19,11 +19,11 @@ Ada dua model auth berbeda di project ini, jangan tertukar:
 
 ### `GET /health`
 
-Publik, **tanpa autentikasi**, buat monitoring eksternal (landing page Yado). Query DB minimal (`SELECT 1`) supaya responsnya cepat — jangan expect ini memvalidasi seluruh dependency (mail, storage, dst.), cuma DB connectivity.
+Publik, **tanpa autentikasi**, buat monitoring eksternal (landing page Yado). Query DB minimal (`SELECT 1`) supaya responsnya cepat - jangan expect ini memvalidasi seluruh dependency (mail, storage, dst.), cuma DB connectivity.
 
 Rate limit: 60 request/menit per IP.
 
-**Response sehat — `200 OK`**
+**Response sehat - `200 OK`**
 ```json
 {
   "status": "ok",
@@ -32,7 +32,7 @@ Rate limit: 60 request/menit per IP.
 }
 ```
 
-**Response bermasalah — `503 Service Unavailable`**
+**Response bermasalah - `503 Service Unavailable`**
 ```json
 {
   "status": "error",
@@ -43,7 +43,7 @@ Rate limit: 60 request/menit per IP.
 
 ### `GET /up`
 
-Health check bawaan Laravel (liveness probe murni — cek app bisa boot & serve response, tanpa cek dependency eksternal). Response HTML, bukan JSON. Dipakai internal (load balancer, uptime monitor sederhana) — untuk dashboard monitoring yang butuh JSON terstruktur, pakai `/health`.
+Health check bawaan Laravel (liveness probe murni - cek app bisa boot & serve response, tanpa cek dependency eksternal). Response HTML, bukan JSON. Dipakai internal (load balancer, uptime monitor sederhana) - untuk dashboard monitoring yang butuh JSON terstruktur, pakai `/health`.
 
 ---
 
@@ -96,7 +96,7 @@ grant_type=refresh_token
 &refresh_token=<refresh token>
 ```
 
-**Response — `200 OK`**
+**Response - `200 OK`**
 ```json
 {
   "token_type": "Bearer",
@@ -108,7 +108,7 @@ grant_type=refresh_token
 
 - Access token berlaku **60 menit**.
 - Refresh token berlaku **30 hari**.
-- Scope yang tersedia: `profile:read` — baca profil user (nama, username, email, avatar, role). Cuma satu scope saat ini, tidak ada scope lain.
+- Scope yang tersedia: `profile:read` - baca profil user (nama, username, email, avatar, role). Cuma satu scope saat ini, tidak ada scope lain.
 
 ---
 
@@ -118,14 +118,14 @@ grant_type=refresh_token
 
 Profil user yang sedang login, diidentifikasi lewat access token.
 
-**Auth**: `Authorization: Bearer <access_token>` — wajib scope `profile:read`. Rate limit: 60 request/menit per user.
+**Auth**: `Authorization: Bearer <access_token>` - wajib scope `profile:read`. Rate limit: 60 request/menit per user.
 
 ```
 GET /api/user
 Authorization: Bearer eyJ...
 ```
 
-**Response — `200 OK`**
+**Response - `200 OK`**
 ```json
 {
   "id": 12,
@@ -149,12 +149,12 @@ Authorization: Bearer eyJ...
 |--------|----------------|
 | `401 Unauthorized` | Token tidak ada, invalid, expired, atau sudah di-revoke (user logout/revoke device) |
 | `403 Forbidden` | Token valid tapi tidak punya scope `profile:read` |
-| `403 Forbidden` | User terkait sudah dinonaktifkan superadmin (`is_active = false`) — dicek via middleware `check.user.active` |
+| `403 Forbidden` | User terkait sudah dinonaktifkan superadmin (`is_active = false`) - dicek via middleware `check.user.active` |
 | `429 Too Many Requests` | Rate limit terlampaui |
 
 ---
 
-## Rate Limit — Ringkasan
+## Rate Limit - Ringkasan
 
 | Endpoint | Limit |
 |----------|-------|
@@ -170,6 +170,6 @@ Response saat kena limit selalu `429 Too Many Requests` dengan header `Retry-Aft
 
 ## Lihat Juga
 
-- [docs/INTEGRATION.md](INTEGRATION.md) — panduan integrasi manual step-by-step untuk developer
-- [docs/AI_INTEGRATION.md](AI_INTEGRATION.md) — brief buat di-paste ke AI assistant supaya auto-generate kode integrasi
-- [docs/SRS.md](SRS.md) — tech spec & DB schema lengkap
+- [docs/INTEGRATION.md](INTEGRATION.md) - panduan integrasi manual step-by-step untuk developer
+- [docs/AI_INTEGRATION.md](AI_INTEGRATION.md) - brief buat di-paste ke AI assistant supaya auto-generate kode integrasi
+- [docs/SRS.md](SRS.md) - tech spec & DB schema lengkap

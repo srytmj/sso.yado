@@ -37,7 +37,7 @@
                             <div>
                                 <p class="text-sm font-medium text-base-content">{{ \App\Support\UserAgentParser::label($device->user_agent) }}</p>
                                 <p class="text-xs text-base-content/40 mt-0.5">
-                                    {{ $device->ip_address ?? '—' }} · {{ \Carbon\Carbon::createFromTimestamp($device->last_activity)->diffForHumans() }}
+                                    {{ $device->ip_address ?? '-' }} · {{ \Carbon\Carbon::createFromTimestamp($device->last_activity)->diffForHumans() }}
                                 </p>
                             </div>
                             @if($isSelf)
@@ -100,7 +100,7 @@
                                 {{ $token->client?->name ?? __('sessions.unknown_app') }}
                             </p>
                             <p class="text-xs text-base-content/40 mt-0.5">
-                                {{ __('sessions.created', ['time' => $token->created_at?->diffForHumans() ?? '—']) }}
+                                {{ __('sessions.created', ['time' => $token->created_at?->diffForHumans() ?? '-']) }}
                                 @if($token->expires_at)
                                     · {{ __('sessions.expired', ['time' => \Carbon\Carbon::parse($token->expires_at)->diffForHumans()]) }}
                                 @endif

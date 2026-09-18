@@ -87,14 +87,34 @@
                             </td>
                             <td class="text-base-content/60 text-xs hidden md:table-cell">{{ $user->created_at->format('d M Y') }}</td>
                             <td>
-                                <form method="POST" action="{{ route('dashboard.users.toggle-active', $user->id) }}">
-                                    @csrf @method('PATCH')
-                                    @if($user->is_active)
-                                        <button type="submit" class="btn btn-error btn-xs active:scale-95">{{ __('users.deactivate') }}</button>
-                                    @else
-                                        <button type="submit" class="btn btn-ghost btn-xs active:scale-95">{{ __('users.activate') }}</button>
-                                    @endif
-                                </form>
+                                <div class="flex gap-2 items-center">
+                                    <form method="POST" action="{{ route('dashboard.users.toggle-active', $user->id) }}">
+                                        @csrf @method('PATCH')
+                                        @if($user->is_active)
+                                            <button type="submit" class="btn btn-error btn-xs active:scale-95">{{ __('users.deactivate') }}</button>
+                                        @else
+                                            <button type="submit" class="btn btn-ghost btn-xs active:scale-95">{{ __('users.activate') }}</button>
+                                        @endif
+                                    </form>
+
+                                    <!-- Change Password Dropdown -->
+                                    <div x-data="{ open: false }" class="relative">
+                                        <button type="button" @click="open = !open" class="btn btn-outline btn-xs active:scale-95">Pass</button>
+                                        <div x-show="open" @click.outside="open = false" x-cloak
+                                             class="absolute right-0 z-20 mt-1 w-64 bg-base-100 border border-base-300 rounded-box shadow-lg p-3">
+                                            <form method="POST" action="{{ route('dashboard.users.password', $user->id) }}">
+                                                @csrf @method('PATCH')
+                                                <div class="form-control mb-2">
+                                                    <input type="password" name="new_password" placeholder="New Password" required minlength="8" class="input input-bordered input-sm w-full" />
+                                                </div>
+                                                <div class="form-control mb-3">
+                                                    <input type="password" name="new_password_confirmation" placeholder="Confirm Password" required minlength="8" class="input input-bordered input-sm w-full" />
+                                                </div>
+                                                <button type="submit" class="btn btn-neutral btn-sm w-full">Ganti</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @empty

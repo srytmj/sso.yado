@@ -119,7 +119,7 @@
                                         </div>
                                     </td>
                                     <td class="text-base-content/60 hidden md:table-cell">
-                                        {{ $session->ip_address ?? '—' }}
+                                        {{ $session->ip_address ?? '-' }}
                                     </td>
                                     <td class="text-base-content/60 hidden lg:table-cell">
                                         {{ \Carbon\Carbon::createFromTimestamp($session->last_activity)->diffForHumans() }}

@@ -38,4 +38,11 @@ class UserManagementService
 
         $this->auditLog->record('dashboard.user_role_changed', "Role user \"{$user->email}\" diubah jadi \"{$role->name}\"", $user);
     }
+
+    public function changeUserPassword(User $user, string $newPassword): void
+    {
+        $user->update(['password' => bcrypt($newPassword)]);
+
+        $this->auditLog->record('dashboard.user_password_changed', "Password user \"{$user->email}\" diubah oleh superadmin", $user);
+    }
 }

@@ -11,7 +11,7 @@ return [
     'delete_confirm' => 'Hapus client dan revoke semua token?',
     'no_applications' => 'Belum ada aplikasi terdaftar.',
 
-    'save_now_warning' => 'Simpan sekarang — tidak bisa dilihat lagi',
+    'save_now_warning' => 'Simpan sekarang - tidak bisa dilihat lagi',
     'client_id_label' => 'Client ID',
     'client_secret_label' => 'Client Secret',
     'env_snippet_label' => '.env snippet',
@@ -21,7 +21,7 @@ return [
     'copied' => 'Copied!',
 
     'credentials_heading' => 'Credentials',
-    'secret_hidden' => 'Tersembunyi — hanya ditampilkan sekali saat dibuat',
+    'secret_hidden' => 'Tersembunyi - hanya ditampilkan sekali saat dibuat',
     'redirect_uri_label' => 'Redirect URI',
     'edit_heading' => 'Edit',
     'name_label' => 'Nama',
@@ -36,7 +36,7 @@ return [
     'validate_invalid_format' => 'Format URI tidak valid',
     'validate_no_fragment' => 'Redirect URI tidak boleh mengandung fragment (#)',
     'validate_scheme_forbidden' => 'Scheme tidak diizinkan',
-    'validate_localhost_warning' => 'URI development — pastikan sudah diganti saat production',
+    'validate_localhost_warning' => 'URI development - pastikan sudah diganti saat production',
     'validate_https_required' => 'Wajib menggunakan HTTPS untuk domain publik',
     'validate_valid' => 'URI valid',
 ];

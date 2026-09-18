@@ -98,7 +98,7 @@ Your restrictions:
 
 Code standards:
 - Follow the stack defined in .claude/CLAUDE.md.
-- Laravel: PSR-12, type hints on all methods, controllers thin — logic in Services or Actions.
+- Laravel: PSR-12, type hints on all methods, controllers thin - logic in Services or Actions.
 - Blade: minimal logic in templates.
 - No dd(), no var_dump() in production code.
 - Conventional commits: feat:, fix:, chore:, refactor:.
@@ -154,7 +154,7 @@ Review checklist per ticket:
 - Are there security issues? (token leak, CSRF bypass, injection)
 - Is rate limiting in place on login and /oauth/token?
 - Is response format correct per SRS API contract?
-- Is controller thin — logic in Service/Action, not Controller?
+- Is controller thin - logic in Service/Action, not Controller?
 
 When a bug is found, generate a prompt in this format:
 

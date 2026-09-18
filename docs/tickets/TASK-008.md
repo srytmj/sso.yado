@@ -28,16 +28,16 @@ Depends on: TASK-003, TASK-004
 
 > **Method**: Static code review.
 
-- [x] POST `/logout` → session hancur, redirect ke `/login` — `LogoutController::destroy()`: `Auth::logout()` → `invalidate()` → `regenerateToken()` → `redirect()->route('login')` ✓
-- [x] Akses halaman protected setelah logout → redirect ke `/login` — session dihapus, `auth` middleware redirect ke named route `login` ✓
-- [x] GET `/api/user` dengan access token lama setelah logout → 401 — `RevokeTokenAction` memanggil `$token->revoke()` untuk semua token; `auth:api` guard menolak token yang revoked ✓
-- [x] POST `/oauth/token` dengan refresh token lama setelah logout → `invalid_grant` — `$token->refreshTokens()->update(['revoked' => true])` di `RevokeTokenAction:13` ✓
-- [x] POST `/logout` tanpa CSRF → HTTP 419 — Laravel default CSRF middleware aktif untuk semua web routes ✓
-- [x] User tidak login POST `/logout` → redirect, tidak error 500 — route punya middleware `auth` → redirect ke `/login` sebelum masuk controller ✓
-- [x] User punya multiple token → semua di-revoke — `foreach ($user->tokens as $token)` iterates semua token di `RevokeTokenAction:11` ✓
+- [x] POST `/logout` → session hancur, redirect ke `/login` - `LogoutController::destroy()`: `Auth::logout()` → `invalidate()` → `regenerateToken()` → `redirect()->route('login')` ✓
+- [x] Akses halaman protected setelah logout → redirect ke `/login` - session dihapus, `auth` middleware redirect ke named route `login` ✓
+- [x] GET `/api/user` dengan access token lama setelah logout → 401 - `RevokeTokenAction` memanggil `$token->revoke()` untuk semua token; `auth:api` guard menolak token yang revoked ✓
+- [x] POST `/oauth/token` dengan refresh token lama setelah logout → `invalid_grant` - `$token->refreshTokens()->update(['revoked' => true])` di `RevokeTokenAction:13` ✓
+- [x] POST `/logout` tanpa CSRF → HTTP 419 - Laravel default CSRF middleware aktif untuk semua web routes ✓
+- [x] User tidak login POST `/logout` → redirect, tidak error 500 - route punya middleware `auth` → redirect ke `/login` sebelum masuk controller ✓
+- [x] User punya multiple token → semua di-revoke - `foreach ($user->tokens as $token)` iterates semua token di `RevokeTokenAction:11` ✓
 
 **Additional checks:**
-- [x] `RevokeTokenAction` adalah Action class terpisah, `LogoutController` inject via constructor — thin controller ✓
+- [x] `RevokeTokenAction` adalah Action class terpisah, `LogoutController` inject via constructor - thin controller ✓
 - [x] Urutan operasi logout benar: revoke tokens → logout → invalidate → regenerateToken ✓
 - [x] Tidak ada `dd()` ✓
 

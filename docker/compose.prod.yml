@@ -2,13 +2,13 @@ name: sso-yado
 
 # Production compose untuk homelab (Proxmox + banyak project Docker di 1 host).
 # Beda dari docker-compose.yml (dev):
-#   - Tidak mount source code — kode di-bake ke image saat build
+#   - Tidak mount source code - kode di-bake ke image saat build
 #   - Join network eksternal "proxy" (Traefik) alih-alih expose port langsung
 #   - restart: unless-stopped + healthcheck
-#   - migrate (bukan migrate:fresh) saat update — data tidak boleh hilang
+#   - migrate (bukan migrate:fresh) saat update - data tidak boleh hilang
 #
 # Pakai: make docker-prod-deploy (atau manual: docker compose -f docker/compose.prod.yml
-# --project-directory . up -d --build — flag --project-directory WAJIB supaya semua path
+# --project-directory . up -d --build - flag --project-directory WAJIB supaya semua path
 # relatif di file ini tetap resolve ke root repo, bukan ke folder docker/)
 
 services:
@@ -23,7 +23,7 @@ services:
       - ./.env:/var/www/html/.env
     env_file: .env
     environment:
-      # Project ini pakai read/write split (lihat config/database.php) — DB_HOST saja
+      # Project ini pakai read/write split (lihat config/database.php) - DB_HOST saja
       # tidak cukup, DB_READ_HOST/DB_WRITE_HOST eksplisit di .env akan menang atas
       # fallback ke DB_HOST kalau tidak di-override juga di sini.
       DB_HOST: postgres
@@ -48,7 +48,7 @@ services:
       - sso
       - proxy
     labels:
-      # Traefik v2/v3 — sesuaikan Host() dan certresolver dengan setup Traefik kamu
+      # Traefik v2/v3 - sesuaikan Host() dan certresolver dengan setup Traefik kamu
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
       - "traefik.http.routers.sso.rule=Host(`sso.yado.my.id`)"
@@ -61,7 +61,7 @@ services:
     restart: unless-stopped
     environment:
       # Beda dari MySQL: image Postgres resmi tidak punya konsep root+user terpisah,
-      # cuma 1 superuser yang dibuat dari POSTGRES_USER/POSTGRES_PASSWORD — jadi ini
+      # cuma 1 superuser yang dibuat dari POSTGRES_USER/POSTGRES_PASSWORD - jadi ini
       # HARUS sama persis dengan DB_USERNAME/DB_PASSWORD yang dipakai aplikasi.
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}

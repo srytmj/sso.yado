@@ -1,4 +1,4 @@
-# SRS — SSO Engine (sso.yado.my.id)
+# SRS - SSO Engine (sso.yado.my.id)
 
 ## Tech Stack
 
@@ -7,7 +7,7 @@
 | Backend | Laravel (latest stable) |
 | Auth | Laravel Passport (OAuth2 server) |
 | Frontend | Blade + Alpine.js + Tailwind CSS |
-| Database | PostgreSQL — `db_sso` (read/write split, sticky mode) |
+| Database | PostgreSQL - `db_sso` (read/write split, sticky mode) |
 | Hosting | Linux VM / EC2 |
 | Email | Resend (transactional email) |
 | Tunnel | Cloudflare (DNS + proxy) |
@@ -197,12 +197,12 @@ Memerlukan `Authorization: Bearer {access_token}` dengan scope `profile:read`.
 }
 ```
 
-**Response 401** — token tidak valid / expired
+**Response 401** - token tidak valid / expired
 ```json
 { "message": "Unauthenticated." }
 ```
 
-**Response 403** — token valid tapi scope kurang
+**Response 403** - token valid tapi scope kurang
 ```json
 { "message": "Invalid scope(s) provided." }
 ```
@@ -220,7 +220,7 @@ Redirect ke `/oauth/authorize` jika ada `intended` URL tersimpan, atau ke `/` ji
 ### POST /register (Web)
 
 ```
-name: string nullable max:255   # opsional — jika kosong, fallback ke username
+name: string nullable max:255   # opsional - jika kosong, fallback ke username
 username: string required unique max:50 regex:[a-z0-9_]
 email: string required email unique
 password: string required min:8 confirmed
@@ -241,10 +241,10 @@ Scope tambahan akan didefinisikan di tiket tersendiri saat dibutuhkan.
 ## Client Registration
 
 OAuth client didaftarkan sebagai **confidential client** dengan:
-- `client_id` — UUID auto-generate Passport
-- `client_secret` — hashed, dikirim sekali saat create
-- `redirect_uri` — whitelist URI
-- `is_first_party` — flag untuk auto-approve consent (custom field atau via Passport `personal_access_client`)
+- `client_id` - UUID auto-generate Passport
+- `client_secret` - hashed, dikirim sekali saat create
+- `redirect_uri` - whitelist URI
+- `is_first_party` - flag untuk auto-approve consent (custom field atau via Passport `personal_access_client`)
 
 ---
 
@@ -260,7 +260,7 @@ OAuth client didaftarkan sebagai **confidential client** dengan:
 
 ## Security Spec
 
-- PKCE (`S256`) wajib — tolak request tanpa `code_challenge`
+- PKCE (`S256`) wajib - tolak request tanpa `code_challenge`
 - CSRF middleware aktif di semua route web (form login/register)
 - Rate limiting: `throttle:5,1` pada `POST /login` dan `POST /oauth/token`
 - Password minimal 8 karakter, bcrypt cost default

@@ -9,7 +9,7 @@ return [
     'register_now' => 'Register Now',
 
     'feature_sso_title' => 'Single Sign-On',
-    'feature_sso_description' => 'Sign in once and get straight into every app in the ecosystem — no repeated passwords.',
+    'feature_sso_description' => 'Sign in once and get straight into every app in the ecosystem - no repeated passwords.',
     'feature_oauth_title' => 'OAuth2 + PKCE',
     'feature_oauth_description' => 'Industry-standard Authorization Code flow with PKCE for maximum security on every exchange.',
     'feature_register_title' => 'Self-service Register',
