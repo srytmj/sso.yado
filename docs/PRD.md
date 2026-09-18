@@ -2,7 +2,7 @@
 
 ## Problem Statement
 
-Ekosistem Yado terdiri dari beberapa aplikasi (saat ini: Malas, Scribe) yang masing-masing butuh autentikasi. Tanpa identity provider terpusat, setiap app harus maintain auth stack sendiri — duplikasi kode, user harus login ulang per app, dan session management tersebar. SSO Engine menyelesaikan ini dengan menyediakan satu titik autentikasi OAuth2 untuk seluruh ekosistem yado.my.id.
+Project Yado terdiri dari beberapa microservice dan aplikasi (saat ini: Malas, Scribe) yang masing-masing butuh autentikasi. Tanpa identity provider terpusat, setiap app harus maintain auth stack sendiri — duplikasi kode, user harus login ulang per app, dan session management tersebar. SSO Engine adalah salah satu microservice dari Yado yang menyelesaikan masalah ini dengan menyediakan satu titik autentikasi OAuth2 untuk seluruh ekosistem Yado.my.id.
 
 ## Target Users
 
@@ -53,7 +53,7 @@ Project ini membangun Central SSO Engine (`sso.yado.my.id`) beserta dashboard pe
 
 ### P1 — Done ✓
 
-- **Landing page** (`/`): halaman publik yang menjelaskan SSO Engine — OAuth2 + PKCE, self-service register, ekosistem yado.my.id. Tautan ke `/login` dan `/register`.
+- **Landing page** (`/`): halaman publik yang menjelaskan SSO Engine — OAuth2 + PKCE, self-service register, ekosistem Yado.my.id. Tautan ke `/login` dan `/register`.
 - **My Account** (`/account`): halaman self-service untuk user yang sudah login
   - Info akun: name, username, email, avatar, role, status verifikasi email
   - Ganti password

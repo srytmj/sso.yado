@@ -6,7 +6,7 @@ Panduan untuk developer yang ingin mengintegrasikan aplikasi ke SSO Engine yado.
 
 ## Apa itu SSO Engine?
 
-`sso.yado.my.id` adalah **Central Identity Provider** untuk ekosistem yado.my.id. Semua aplikasi (Malas, Scribe, dll.) mendelegasikan autentikasi ke sini — user cukup login sekali dan bisa akses semua app tanpa login ulang.
+`sso.yado.my.id` adalah **Central Identity Provider** untuk ekosistem Yado.my.id. Semua aplikasi (Malas, Scribe, dll.) mendelegasikan autentikasi ke sini — user cukup login sekali dan bisa akses semua app tanpa login ulang.
 
 Protokol: **OAuth2 Authorization Code + PKCE** (RFC 6749 + RFC 7636). PKCE wajib — tidak ada fallback.
 
@@ -54,7 +54,7 @@ Cara paling cepat. Cocok untuk Laravel, Next.js, atau stack apapun yang AI kamu 
 3. Paste prompt berikut:
 
 ```
-Integrasikan SSO yado.my.id ke project ini menggunakan panduan berikut:
+Integrasikan SSO Yado.my.id ke project ini menggunakan panduan berikut:
 [link ke docs/AI_INTEGRATION.md di repo SSO]
 
 Credentials yang sudah tersedia di .env:

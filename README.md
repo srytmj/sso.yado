@@ -1,6 +1,6 @@
-# SSO Engine — yado
+# SSO Engine — Yado
 
-Central Identity Provider untuk ekosistem yado. User login sekali, bisa akses semua aplikasi (Malas, Scribe, dll.) tanpa login ulang.
+SSO Engine adalah salah satu microservice dari project Yado. Service ini berfungsi sebagai Central Identity Provider untuk ekosistem Yado. User cukup login sekali di sini, lalu bisa mengakses semua aplikasi lain (seperti Malas, Scribe, dll.) tanpa perlu login ulang.
 
 **Protokol**: OAuth2 Authorization Code + PKCE (RFC 6749 + RFC 7636)
 **URL produksi**: `https://sso.suryatmaja.dev` *(sementara, domain final belum ditentukan)*
@@ -54,7 +54,7 @@ DB_PASSWORD=
 MAIL_MAILER=resend
 RESEND_API_KEY=re_xxx
 MAIL_FROM_ADDRESS=noreply@yado.my.id
-MAIL_FROM_NAME="SSO yado"
+MAIL_FROM_NAME="SSO Yado"
 ```
 
 ```bash
@@ -170,7 +170,7 @@ docs/
 | `GET /dashboard/audit-log` | Log event keamanan & perubahan data (superadmin) |
 | `GET /dashboard/logs` | Log aplikasi/error mentah (superadmin) |
 | `GET /up` | Health check bawaan Laravel (liveness murni, HTML) |
-| `GET /health` | Health check buat monitoring eksternal (landing page yado) — JSON, cek koneksi DB |
+| `GET /health` | Health check buat monitoring eksternal (landing page Yado) — JSON, cek koneksi DB |
 
 ---
 

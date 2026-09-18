@@ -19,7 +19,7 @@ Ada dua model auth berbeda di project ini, jangan tertukar:
 
 ### `GET /health`
 
-Publik, **tanpa autentikasi**, buat monitoring eksternal (landing page yado). Query DB minimal (`SELECT 1`) supaya responsnya cepat — jangan expect ini memvalidasi seluruh dependency (mail, storage, dst.), cuma DB connectivity.
+Publik, **tanpa autentikasi**, buat monitoring eksternal (landing page Yado). Query DB minimal (`SELECT 1`) supaya responsnya cepat — jangan expect ini memvalidasi seluruh dependency (mail, storage, dst.), cuma DB connectivity.
 
 Rate limit: 60 request/menit per IP.
 

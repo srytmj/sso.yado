@@ -9,7 +9,7 @@ use Throwable;
 class HealthCheckService
 {
     /**
-     * Cek kesehatan service ini buat monitoring eksternal (landing page yado).
+     * Cek kesehatan service ini buat monitoring eksternal (landing page Yado).
      * Sengaja cuma query ringan (`SELECT 1`) — cukup buat pastikan koneksi DB hidup,
      * tanpa bikin endpoint ini jadi lambat/berat.
      *

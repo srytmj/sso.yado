@@ -1,12 +1,12 @@
 # SSO Integration Brief — yado.my.id
 
-> Gunakan file ini sebagai context untuk AI: *"Integrasikan SSO yado.my.id ke project ini menggunakan panduan berikut."*
+> Gunakan file ini sebagai context untuk AI: *"Integrasikan SSO Yado.my.id ke project ini menggunakan panduan berikut."*
 
 ---
 
 ## Konteks
 
-`sso.yado.my.id` adalah Central Identity Provider untuk ekosistem yado.my.id.
+`sso.yado.my.id` adalah Central Identity Provider untuk ekosistem Yado.my.id.
 Protokol: **OAuth2 Authorization Code + PKCE** (wajib, tidak ada fallback).
 Semua aplikasi dalam ekosistem mendelegasikan auth ke sini — tidak perlu bikin login sendiri.
 
