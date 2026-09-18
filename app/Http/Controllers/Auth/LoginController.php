@@ -24,12 +24,6 @@ class LoginController extends Controller
 
     public function store(Request $request): Response
     {
-        \Illuminate\Support\Facades\Log::info('LOGIN ATTEMPT DEBUG', [
-            'email' => $request->input('email'),
-            'ip' => $request->ip(),
-            'all' => $request->except('password'),
-        ]);
-
         $validated = $request->validate([
             'email' => ['required', 'string'],
             'password' => ['required', 'string'],
