@@ -40,7 +40,10 @@ class LoginController extends Controller
         $intended = $request->session()->pull('url.intended');
 
         if ($intended) {
-            return Inertia::location($intended);
+            $intendedUrl = preg_replace('/([?&])prompt=login(&|$)/', '$1', $intended);
+            $intendedUrl = rtrim(rtrim($intendedUrl, '&'), '?');
+
+            return Inertia::location($intendedUrl);
         }
 
         $default = auth()->user()->role?->slug === 'superadmin'

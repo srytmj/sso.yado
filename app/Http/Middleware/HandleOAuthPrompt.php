@@ -17,10 +17,12 @@ class HandleOAuthPrompt
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->is('oauth/authorize') && $request->query('prompt') === 'login' && Auth::check()) {
-            Auth::guard('web')->logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
+        if ($request->is('oauth/authorize') && $request->query('prompt') === 'login') {
+            if (Auth::check()) {
+                Auth::guard('web')->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+            }
 
             $url = $request->fullUrlWithQuery(['prompt' => null]);
 
