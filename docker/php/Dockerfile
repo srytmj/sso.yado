@@ -3,7 +3,7 @@
 # --- Stage 1: build frontend assets ---
 FROM node:20-alpine AS assets
 WORKDIR /app
-COPY package.json package-lock.json* .npmrc ./
+COPY package.json package-lock.json* ./
 RUN npm install
 COPY resources resources
 COPY vite.config.js ./
