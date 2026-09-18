@@ -45,7 +45,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
             $status = $response->getStatusCode();
 
-            if (! app()->environment(['local', 'testing']) && in_array($status, [403, 404, 419, 429, 500, 503], true)) {
+            if (! app()->environment(['local', 'testing']) && in_array($status, [403, 404, 405, 419, 429, 500, 503], true)) {
                 return Inertia::render('Error', ['status' => $status])
                     ->toResponse($request)
                     ->setStatusCode($status);

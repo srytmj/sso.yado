@@ -16,6 +16,10 @@
             title: 'Not Found',
             body: 'Halaman yang kamu cari tidak ditemukan.',
         },
+        405: {
+            title: 'Method Not Allowed',
+            body: 'Permintaan ini tidak didukung oleh server.',
+        },
         419: {
             title: 'Session Expired',
             body: 'Sesi kamu sudah kedaluwarsa, silakan muat ulang halaman.',

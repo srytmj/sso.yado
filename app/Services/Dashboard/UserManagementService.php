@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Services\AuditLogService;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Validation\ValidationException;
 
 class UserManagementService
 {
@@ -19,7 +20,9 @@ class UserManagementService
     public function toggleActive(User $user, User $actor): void
     {
         if ($user->id === $actor->id) {
-            abort(422, 'Tidak bisa menonaktifkan akun sendiri.');
+            throw ValidationException::withMessages([
+                'is_active' => 'Tidak bisa menonaktifkan akun sendiri.',
+            ]);
         }
 
         $user->update(['is_active' => ! $user->is_active]);
@@ -38,7 +41,9 @@ class UserManagementService
         $willBeSuperadmin = $role->slug === 'superadmin';
 
         if ($user->id === $actor->id && ! $willBeSuperadmin) {
-            abort(422, 'Kamu tidak bisa menurunkan role akun sendiri.');
+            throw ValidationException::withMessages([
+                'role_id' => 'Kamu tidak bisa menurunkan role akun sendiri.',
+            ]);
         }
 
         if ($wasSuperadmin && ! $willBeSuperadmin) {
@@ -48,7 +53,9 @@ class UserManagementService
                 ->count();
 
             if ($remainingSuperadmins === 0) {
-                abort(422, 'Tidak bisa menurunkan superadmin terakhir yang tersisa.');
+                throw ValidationException::withMessages([
+                    'role_id' => 'Tidak bisa menurunkan superadmin terakhir yang tersisa.',
+                ]);
             }
         }
 
