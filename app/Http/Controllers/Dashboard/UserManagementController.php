@@ -40,7 +40,7 @@ class UserManagementController extends Controller
             'role_id' => ['required', 'exists:roles,id'],
         ]);
 
-        $this->service->assignRole($user, $validated['role_id']);
+        $this->service->assignRole($user, $validated['role_id'], $request->user());
 
         return back()->with('success', 'Role user diperbarui.');
     }

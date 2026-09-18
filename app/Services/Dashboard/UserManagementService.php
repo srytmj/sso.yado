@@ -31,9 +31,27 @@ class UserManagementService
         );
     }
 
-    public function assignRole(User $user, int $roleId): void
+    public function assignRole(User $user, int $roleId, User $actor): void
     {
         $role = Role::findOrFail($roleId);
+        $wasSuperadmin = $user->role?->slug === 'superadmin';
+        $willBeSuperadmin = $role->slug === 'superadmin';
+
+        if ($user->id === $actor->id && ! $willBeSuperadmin) {
+            abort(422, 'Kamu tidak bisa menurunkan role akun sendiri.');
+        }
+
+        if ($wasSuperadmin && ! $willBeSuperadmin) {
+            $remainingSuperadmins = User::where('role_id', $user->role_id)
+                ->where('is_active', true)
+                ->where('id', '!=', $user->id)
+                ->count();
+
+            if ($remainingSuperadmins === 0) {
+                abort(422, 'Tidak bisa menurunkan superadmin terakhir yang tersisa.');
+            }
+        }
+
         $user->update(['role_id' => $roleId]);
 
         $this->auditLog->record('dashboard.user_role_changed', "Role user \"{$user->email}\" diubah jadi \"{$role->name}\"", $user);

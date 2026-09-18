@@ -78,6 +78,7 @@ class ApplicationController extends Controller
     private function duplicateError(array $data, ?Client $ignoring = null): ?array
     {
         $others = Client::query()
+            ->where('revoked', false)
             ->when($ignoring, fn ($query) => $query->where('id', '!=', $ignoring->id))
             ->get();
 

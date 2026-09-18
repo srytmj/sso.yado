@@ -43,8 +43,8 @@
 
     function openPasswordModal(user) {
         activePasswordUser = user;
-        passwordForm.reset();
-        passwordForm.clearErrors();
+        $passwordForm.reset();
+        $passwordForm.clearErrors();
         passwordDialog?.showModal();
     }
 
@@ -57,7 +57,7 @@
         if (!activePasswordUser) return;
         $passwordForm.patch(`/dashboard/users/${activePasswordUser.id}/password`, {
             onSuccess: () => {
-                passwordForm.reset();
+                $passwordForm.reset();
                 closePasswordModal();
             }
         });
