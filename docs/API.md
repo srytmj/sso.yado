@@ -64,9 +64,12 @@ GET /oauth/authorize
     &state=<random string, CSRF protection>
     &code_challenge=<PKCE challenge>
     &code_challenge_method=S256
+    &prompt=login             <opsional, paksa re-auth / tambah akun>
 ```
 
-Kalau user belum login, otomatis diarahkan ke `/login` dulu (dengan banner nama aplikasi), lalu kembali ke consent screen. Setelah user klik **Authorize**, redirect ke `redirect_uri` dengan `?code=<auth code>&state=<state>`. Auth code berlaku ~10 menit, single-use.
+- **Silent Authorization**: Untuk aplikasi internal ekosistem Yado (`skipsAuthorization() == true`), setelah terautentikasi pengguna langsung diarahkan kembali ke `redirect_uri` tanpa perlu melalui consent screen manual.
+- **`prompt=login`**: Jika disertakan, sesi login aktif di SSO akan diputus dan pengguna dipaksa memasukkan kredensial baru (berguna untuk multi-account linking di client apps).
+- Jika pengguna belum terautentikasi, mereka akan diarahkan ke form `/login` (dengan context banner aplikasi target), lalu diproses kembali ke alur otentikasi. Setelah berhasil, diarahkan ke `redirect_uri` dengan `?code=<auth code>&state=<state>`. Auth code berlaku ~10 menit, single-use.
 
 ### `POST /oauth/token`
 

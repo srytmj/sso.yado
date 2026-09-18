@@ -202,7 +202,18 @@ public function redirect(): RedirectResponse
 }
 ```
 
-Jika user sudah punya session aktif di SSO, mereka **tidak akan melihat halaman login** - langsung di-redirect balik dengan auth code (silent SSO).
+Jika user sudah punya session aktif di SSO, mereka **tidak akan melihat halaman login maupun consent screen** — langsung di-redirect balik dengan auth code (silent SSO otomatis untuk internal ecosystem clients).
+
+#### Opsional: Force Re-Authentication / Tambah Akun (`prompt=login`)
+Jika aplikasi kamu mendukung multi-akun ("Tambah Akun") atau ingin memaksa pengguna memasukkan kredensial baru meskipun sesi SSO sedang aktif, sertakan parameter `prompt=login`:
+
+```php
+$params = [
+    // ... parameter OAuth reguler ...
+    'prompt' => 'login',
+];
+```
+Ketika parameter ini dikirim, SSO akan otomatis memutus sesi browser aktif di SSO dan menampilkan form login, lalu meneruskan otentikasi akun baru tersebut kembali ke `redirect_uri` aplikasimu.
 
 ---
 

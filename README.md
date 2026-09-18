@@ -180,7 +180,8 @@ SSO_REDIRECT_URI=https://<your-app>/auth/callback
    ```
    https://sso.yado.my.id/oauth/authorize?response_type=code&client_id={SSO_CLIENT_ID}&redirect_uri={SSO_REDIRECT_URI}&scope=profile:read&state={STATE}&code_challenge={CHALLENGE}&code_challenge_method=S256
    ```
-3. Receive the authorization `code` at `SSO_REDIRECT_URI`.
+   *(Pass `&prompt=login` if forcing re-authentication or linking multiple accounts).*
+3. Receive the authorization `code` at `SSO_REDIRECT_URI` (internal clients skip manual consent prompts via silent authorization).
 4. Exchange the code via `POST https://sso.yado.my.id/oauth/token` supplying `code_verifier`.
 5. Fetch user profile via `GET https://sso.yado.my.id/api/user` with Bearer token.
 6. Terminate session via two-phase logout: clear local session, then redirect to `https://sso.yado.my.id/logout?redirect_uri=<your-app>`.
