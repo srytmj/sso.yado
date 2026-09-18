@@ -29,16 +29,18 @@ composer install --no-dev --optimize-autoloader
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
-# Migrate fresh - drop semua table dan recreate dari awal
-php artisan migrate:fresh --force
+# Migrate database (bukan migrate:fresh agar data lama aman)
+php artisan migrate --force
 
 # Symlink storage/app/public -> public/storage (dibutuhkan untuk avatar upload disk lokal)
-php artisan storage:link
+php artisan storage:link --force || true
 
-# Generate Passport encryption keys
-php artisan passport:keys --force
+# Generate Passport encryption keys jika belum ada
+if [ ! -f storage/oauth-private.key ]; then
+    php artisan passport:keys --force
+fi
 
-# Seed roles + admin user
+# Seed roles + admin user (hanya saat setup awal)
 php artisan db:seed --force
 
 # Optimize - jalankan sebagai www-data agar file cache writable oleh Nginx
