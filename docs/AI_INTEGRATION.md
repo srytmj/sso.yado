@@ -1,12 +1,12 @@
-# SSO Integration Brief — whitearchive.id
+# SSO Integration Brief — yado.my.id
 
-> Gunakan file ini sebagai context untuk AI: *"Integrasikan SSO whitearchive.id ke project ini menggunakan panduan berikut."*
+> Gunakan file ini sebagai context untuk AI: *"Integrasikan SSO yado.my.id ke project ini menggunakan panduan berikut."*
 
 ---
 
 ## Konteks
 
-`sso.whitearchive.id` adalah Central Identity Provider untuk ekosistem whitearchive.id.
+`sso.yado.my.id` adalah Central Identity Provider untuk ekosistem yado.my.id.
 Protokol: **OAuth2 Authorization Code + PKCE** (wajib, tidak ada fallback).
 Semua aplikasi dalam ekosistem mendelegasikan auth ke sini — tidak perlu bikin login sendiri.
 
@@ -14,13 +14,13 @@ Semua aplikasi dalam ekosistem mendelegasikan auth ke sini — tidak perlu bikin
 
 ## Prasyarat
 
-Superadmin sudah mendaftarkan app ini di `sso.whitearchive.id/dashboard/applications` dan memberikan:
+Superadmin sudah mendaftarkan app ini di `sso.yado.my.id/dashboard/applications` dan memberikan:
 
 ```env
 SSO_CLIENT_ID=<uuid>
 SSO_CLIENT_SECRET=<secret>
 SSO_REDIRECT_URI=https://<domain-app-ini>/auth/callback
-SSO_BASE_URL=https://sso.whitearchive.id
+SSO_BASE_URL=https://sso.yado.my.id
 ```
 
 Tambahkan 4 variabel ini ke `.env` app.
@@ -165,7 +165,7 @@ return [
     'client_id'     => env('SSO_CLIENT_ID'),
     'client_secret' => env('SSO_CLIENT_SECRET'),
     'redirect_uri'  => env('SSO_REDIRECT_URI'),
-    'base_url'      => env('SSO_BASE_URL', 'https://sso.whitearchive.id'),
+    'base_url'      => env('SSO_BASE_URL', 'https://sso.yado.my.id'),
 ];
 ```
 
@@ -264,7 +264,7 @@ Auth::user()->theme     // "system" | "light" | "dark"
 Auth::user()->locale    // "id" | "en" | "ja"
 ```
 
-Data di-sync setiap kali user login. Untuk update profil, user harus ke `sso.whitearchive.id/account`.
+Data di-sync setiap kali user login. Untuk update profil, user harus ke `sso.yado.my.id/account`.
 
 ---
 
@@ -349,4 +349,4 @@ Kalau app kamu bukan Laravel, terapkan pola yang setara di framework kamu — in
 
 - API Contract lengkap: `docs/SRS.md`
 - Panduan manual (untuk manusia): `docs/INTEGRATION.md`
-- SSO Engine repo: `sso.whitearchive.id`
+- SSO Engine repo: `sso.yado.my.id`

@@ -1,6 +1,6 @@
 # PM Session
 
-You are a Product Manager for the SSO Engine project (sso.whitearchive.id).
+You are a Product Manager for the SSO Engine project (sso.yado.my.id).
 
 ## Before Anything
 

@@ -1,4 +1,4 @@
-# SRS — SSO Engine (sso.whitearchive.id)
+# SRS — SSO Engine (sso.yado.my.id)
 
 ## Tech Stack
 
@@ -187,8 +187,8 @@ Memerlukan `Authorization: Bearer {access_token}` dengan scope `profile:read`.
   "id": 1,
   "name": "Budi Santoso",
   "username": "budi",
-  "email": "budi@whitearchive.id",
-  "avatar": "https://sso.whitearchive.id/avatars/budi.jpg",
+  "email": "budi@yado.my.id",
+  "avatar": "https://sso.yado.my.id/avatars/budi.jpg",
   "role": {
     "id": 1,
     "name": "User",

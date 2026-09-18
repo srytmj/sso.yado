@@ -3,7 +3,7 @@
 return [
     'login_title' => 'Sign In',
     'login_intent_app' => 'Sign in to continue to :app',
-    'login_intent_default' => 'Access whitearchive apps from each app — you\'ll be redirected here automatically.',
+    'login_intent_default' => 'Access yado apps from each app — you\'ll be redirected here automatically.',
     'email_or_username' => 'Email or Username',
     'password' => 'Password',
     'remember_me' => 'Remember me',
@@ -13,7 +13,7 @@ return [
     'register_link' => 'Register',
 
     'register_title' => 'Create Account',
-    'register_subtitle' => 'Create your whitearchive account',
+    'register_subtitle' => 'Create your yado account',
     'full_name' => 'Full Name',
     'optional' => 'optional',
     'full_name_placeholder' => 'Leave empty to use username',
@@ -37,7 +37,7 @@ return [
     'reset_password_button' => 'Reset Password',
 
     'invite_title' => 'Accept Invitation',
-    'invite_subtitle' => 'Finish setting up your whitearchive account',
+    'invite_subtitle' => 'Finish setting up your yado account',
     'invite_intro' => 'Invitation for :email as :role.',
     'activate_account_button' => 'Activate Account',
 

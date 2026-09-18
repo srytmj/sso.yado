@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 // Public — always accessible, navbar changes based on auth state
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Health check buat monitoring eksternal (landing page whitearchive) — publik, tanpa
+// Health check buat monitoring eksternal (landing page yado) — publik, tanpa
 // auth, query DB minimal (SELECT 1) supaya responsnya cepat. Beda dari /up bawaan
 // Laravel: endpoint ini bentuk JSON-nya khusus buat dikonsumsi dashboard monitoring.
 Route::get('/health', [HealthController::class, 'check'])->name('health')->middleware('throttle:60,1');

@@ -1,8 +1,8 @@
-# CLAUDE.md — SSO Engine (whitearchive)
+# CLAUDE.md — SSO Engine (yado)
 
 ## Project Overview
 
-Central Identity Provider untuk ekosistem whitearchive. Menyediakan autentikasi OAuth2 terpusat sehingga user cukup login sekali untuk mengakses semua aplikasi dalam ekosistem (Malas, Scribe, dst.).
+Central Identity Provider untuk ekosistem yado. Menyediakan autentikasi OAuth2 terpusat sehingga user cukup login sekali untuk mengakses semua aplikasi dalam ekosistem (Malas, Scribe, dst.).
 
 Ini adalah **backend-only project** (Laravel). UI-nya minimal — hanya halaman login, register, dan consent screen via Blade. Tidak ada frontend SPA terpisah.
 

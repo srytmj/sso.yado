@@ -5,7 +5,7 @@ Dokumen ini mendeskripsikan struktur folder project dan konvensi penamaan.
 ## Root
 
 ```
-sso.whitearchive/
+sso.yado/
   app/                    # Laravel application code
   config/                 # Laravel config files
   database/               # Migrations, seeders, factories

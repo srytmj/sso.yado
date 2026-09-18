@@ -1,8 +1,8 @@
-# API Reference — SSO Engine (sso.whitearchive.id)
+# API Reference — SSO Engine (sso.yado.my.id)
 
 Referensi teknis semua endpoint HTTP yang dipanggil programmatically (bukan halaman Blade). Untuk panduan integrasi step-by-step, lihat [docs/INTEGRATION.md](INTEGRATION.md) atau [docs/AI_INTEGRATION.md](AI_INTEGRATION.md).
 
-**Base URL**: `https://sso.whitearchive.id` (production) — sesuaikan dengan `APP_URL` di environment kamu.
+**Base URL**: `https://sso.yado.my.id` (production) — sesuaikan dengan `APP_URL` di environment kamu.
 
 ---
 
@@ -19,7 +19,7 @@ Ada dua model auth berbeda di project ini, jangan tertukar:
 
 ### `GET /health`
 
-Publik, **tanpa autentikasi**, buat monitoring eksternal (landing page whitearchive). Query DB minimal (`SELECT 1`) supaya responsnya cepat — jangan expect ini memvalidasi seluruh dependency (mail, storage, dst.), cuma DB connectivity.
+Publik, **tanpa autentikasi**, buat monitoring eksternal (landing page yado). Query DB minimal (`SELECT 1`) supaya responsnya cepat — jangan expect ini memvalidasi seluruh dependency (mail, storage, dst.), cuma DB connectivity.
 
 Rate limit: 60 request/menit per IP.
 
@@ -132,7 +132,7 @@ Authorization: Bearer eyJ...
   "name": "Budi Santoso",
   "username": "budi",
   "email": "budi@example.com",
-  "avatar": "https://sso.whitearchive.id/storage/avatars/12.jpg",
+  "avatar": "https://sso.yado.my.id/storage/avatars/12.jpg",
   "theme": "system",
   "locale": "id",
   "role": {

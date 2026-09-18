@@ -18,7 +18,7 @@
            :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
         <div class="px-4 py-5 border-b border-base-200 flex items-center justify-between">
             <div>
-                <p class="font-semibold text-base-content text-sm">whitearchive</p>
+                <p class="font-semibold text-base-content text-sm">yado</p>
                 <p class="text-xs text-base-content/40 mt-0.5">Superadmin</p>
             </div>
             @include('partials.theme-toggle')

@@ -17,7 +17,7 @@ Request: Tambahkan context awareness di halaman login. Jika user datang dari OAu
   - Pass `$clientName` (nullable string) ke view
 - [x] `resources/views/auth/login.blade.php` — conditional UI:
   - `$clientName` ada → banner biru: *"Anda akan masuk ke [Client Name]. Silakan login untuk melanjutkan."*
-  - `$clientName` null → notice amber: *"Untuk masuk ke aplikasi ekosistem whitearchive.id, silakan akses melalui aplikasi yang bersangkutan."*
+  - `$clientName` null → notice amber: *"Untuk masuk ke aplikasi ekosistem yado.my.id, silakan akses melalui aplikasi yang bersangkutan."*
 - [x] Subtitle halaman ikut update: *"Sign in to continue to [Client Name]"* vs *"SSO Engine"*
 - [x] Tidak ada perubahan di Service/Action layer
 

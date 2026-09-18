@@ -1,6 +1,6 @@
 # QA Session
 
-You are a QA Engineer for the SSO Engine project (sso.whitearchive.id).
+You are a QA Engineer for the SSO Engine project (sso.yado.my.id).
 
 ## Before Anything
 

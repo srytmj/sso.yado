@@ -2,7 +2,7 @@
 
 return [
     'badge' => 'OAuth2 + PKCE',
-    'tagline' => 'whitearchive エコシステムのための統合アイデンティティプロバイダー。',
+    'tagline' => 'yado エコシステムのための統合アイデンティティプロバイダー。',
     'tagline_second_line' => '一度のログインで、すべてのアプリにアクセス。',
     'open_dashboard' => 'ダッシュボードを開く',
     'view_my_account' => 'マイアカウントを見る',
@@ -13,7 +13,7 @@ return [
     'feature_oauth_title' => 'OAuth2 + PKCE',
     'feature_oauth_description' => '業界標準の認可コードフローとPKCEにより、すべてのやり取りで最大限のセキュリティを実現します。',
     'feature_register_title' => 'セルフサービス登録',
-    'feature_register_description' => '一度登録すれば、Malas、Scribe など whitearchive のすべてのアプリにアクセスできます。',
+    'feature_register_description' => '一度登録すれば、Malas、Scribe など yado のすべてのアプリにアクセスできます。',
     'feature_token_title' => 'セキュアトークン',
     'feature_token_description' => 'アクセストークンは60分、リフレッシュトークンは30日間有効。アカウントページからいつでも失効できます。',
 ];

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', __('common.app_name') . ' — whitearchive')</title>
+    <title>@yield('title', __('common.app_name') . ' — yado')</title>
     @include('partials.theme-init', ['theme' => auth()->user()?->theme])
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -25,7 +25,7 @@
     </main>
     <footer class="border-t border-base-200 py-8 mt-12">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-            <p class="text-sm text-base-content/40">© {{ date('Y') }} whitearchive · {{ __('common.app_name') }}</p>
+            <p class="text-sm text-base-content/40">© {{ date('Y') }} yado · {{ __('common.app_name') }}</p>
         </div>
     </footer>
 </body>

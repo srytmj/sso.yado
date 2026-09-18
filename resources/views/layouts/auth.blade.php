@@ -14,7 +14,7 @@
     </div>
     <div class="w-full max-w-md animate-slide-up">
         <div class="text-center mb-8">
-            <h1 class="text-2xl font-semibold text-base-content">whitearchive</h1>
+            <h1 class="text-2xl font-semibold text-base-content">yado</h1>
             <p class="text-sm text-base-content/60 mt-1">@yield('subtitle')</p>
         </div>
         <div class="card bg-base-100 border border-base-300 shadow-sm">

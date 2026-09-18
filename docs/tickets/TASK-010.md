@@ -3,7 +3,7 @@
 Status: Done
 Priority: Medium
 Created: 2026-07-20 21:00
-Request: Buat halaman publik di root URL (/) yang menjelaskan SSO Engine whitearchive.id. Halaman ini yang pertama dilihat visitor — bukan form login, bukan dashboard. Harus accessible tanpa login. Tautan ke /login dan /register.
+Request: Buat halaman publik di root URL (/) yang menjelaskan SSO Engine yado.my.id. Halaman ini yang pertama dilihat visitor — bukan form login, bukan dashboard. Harus accessible tanpa login. Tautan ke /login dan /register.
 
 ---
 

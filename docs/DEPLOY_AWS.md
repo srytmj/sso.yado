@@ -1,6 +1,6 @@
 # Deploy ke AWS — SSO Engine
 
-Panduan deploy `sso.whitearchive.id` ke AWS menggunakan **EC2** (mirip VPS, paling fleksibel) atau **Elastic Beanstalk** (managed, auto-scaling).
+Panduan deploy `sso.yado.my.id` ke AWS menggunakan **EC2** (mirip VPS, paling fleksibel) atau **Elastic Beanstalk** (managed, auto-scaling).
 
 ---
 
@@ -23,7 +23,7 @@ Panduan deploy `sso.whitearchive.id` ke AWS menggunakan **EC2** (mirip VPS, pali
 
 1. Buka [console.aws.amazon.com](https://console.aws.amazon.com) → **EC2** → **Launch Instance**
 2. Konfigurasi:
-   - **Name**: `sso-whitearchive`
+   - **Name**: `sso-yado`
    - **AMI**: Ubuntu Server 24.04 LTS (Free Tier eligible) — **jangan pilih 26.04**, ondrej PPA belum support
    - **Instance type**: `t3.micro` (2 vCPU, 1GB RAM) — cukup untuk mulai
    - **Key pair**: Create new → download `.pem` → simpan baik-baik
@@ -105,7 +105,7 @@ Proyek ini pakai model satu superuser Postgres (bukan pola root + user dedicated
 
 ```bash
 cd /var/www
-sudo git clone https://github.com/srytmj/sso.whitearchive.git sso
+sudo git clone https://github.com/srytmj/sso.yado.git sso
 sudo chown -R ubuntu:ubuntu /var/www/sso
 cd /var/www/sso
 
@@ -118,8 +118,8 @@ Isi `.env` yang wajib diubah:
 ```env
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://sso.whitearchive.id
-ASSET_URL=https://sso.whitearchive.id   # harus sama dengan APP_URL — tanpa ini CSS tidak load
+APP_URL=https://sso.yado.my.id
+ASSET_URL=https://sso.yado.my.id   # harus sama dengan APP_URL — tanpa ini CSS tidak load
 
 DB_HOST=127.0.0.1
 DB_PORT=5432
@@ -131,7 +131,7 @@ SESSION_DRIVER=database
 
 MAIL_MAILER=resend
 RESEND_API_KEY=re_xxx
-MAIL_FROM_ADDRESS=noreply@whitearchive.id
+MAIL_FROM_ADDRESS=noreply@yado.my.id
 
 ADMIN_EMAIL=your@email.com
 ADMIN_PASSWORD=strong-admin-password
@@ -157,7 +157,7 @@ sudo nano /etc/nginx/sites-available/sso
 ```nginx
 server {
     listen 80;
-    server_name sso.whitearchive.id;
+    server_name sso.yado.my.id;
     root /var/www/sso/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
@@ -205,7 +205,7 @@ sudo chmod -R 775 /var/www/sso/storage /var/www/sso/bootstrap/cache
 
 ```bash
 sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d sso.whitearchive.id
+sudo certbot --nginx -d sso.yado.my.id
 
 # Auto-renewal
 sudo systemctl enable certbot.timer
@@ -224,7 +224,7 @@ sudo systemctl status nginx
 sudo systemctl status php8.4-fpm
 sudo systemctl status postgresql
 
-curl -I https://sso.whitearchive.id
+curl -I https://sso.yado.my.id
 ```
 
 ---
@@ -248,10 +248,10 @@ aws configure  # isi Access Key ID + Secret dari IAM
 ### 3. Init Elastic Beanstalk
 
 ```bash
-cd /path/to/sso.whitearchive
+cd /path/to/sso.yado
 
 eb init
-# Pilih region, platform: PHP 8.3, create new app: sso-whitearchive
+# Pilih region, platform: PHP 8.3, create new app: sso-yado
 ```
 
 Buat `.ebextensions/nginx.conf` untuk PHP-FPM:
@@ -272,7 +272,7 @@ option_settings:
 eb setenv \
   APP_ENV=production \
   APP_DEBUG=false \
-  APP_URL=https://sso.whitearchive.id \
+  APP_URL=https://sso.yado.my.id \
   APP_KEY=$(php artisan key:generate --show) \
   DB_HOST=<rds-endpoint> \
   DB_PORT=5432 \
@@ -281,7 +281,7 @@ eb setenv \
   DB_PASSWORD=xxx \
   SESSION_DRIVER=database \
   RESEND_API_KEY=re_xxx \
-  MAIL_FROM_ADDRESS=noreply@whitearchive.id
+  MAIL_FROM_ADDRESS=noreply@yado.my.id
 ```
 
 ### 5. Deploy
@@ -305,7 +305,7 @@ php artisan db:seed
 ### 7. Custom Domain + HTTPS
 
 1. Buka EB environment → **Configuration** → **Load Balancer** → tambah HTTPS listener (port 443)
-2. Upload SSL certificate via **AWS Certificate Manager** (ACM) — request certificate untuk `sso.whitearchive.id`
+2. Upload SSL certificate via **AWS Certificate Manager** (ACM) — request certificate untuk `sso.yado.my.id`
 3. Cloudflare DNS: CNAME `sso` → EB environment URL
 
 ---
@@ -382,7 +382,7 @@ Kalau mau PostgreSQL di server terpisah (lebih production-grade dari Postgres lo
 
 ## Checklist Post-Deploy
 
-- [ ] `https://sso.whitearchive.id` accessible, tampil landing page
+- [ ] `https://sso.yado.my.id` accessible, tampil landing page
 - [ ] Login superadmin berhasil
 - [ ] `GET /api/user` dengan token valid → return JSON profil
 - [ ] Create OAuth client di dashboard → Quick Start panel muncul

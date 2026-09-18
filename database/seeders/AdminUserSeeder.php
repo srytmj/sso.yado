@@ -12,7 +12,7 @@ class AdminUserSeeder extends Seeder
         $adminRole = Role::where('slug', 'superadmin')->firstOrFail();
 
         User::firstOrCreate(
-            ['email' => env('ADMIN_EMAIL', 'admin@whitearchive.id')],
+            ['email' => env('ADMIN_EMAIL', 'admin@yado.my.id')],
             [
                 'name' => 'Admin',
                 'username' => 'admin',

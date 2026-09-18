@@ -1,4 +1,4 @@
-name: sso-whitearchive
+name: sso-yado
 
 services:
   app:
@@ -58,4 +58,4 @@ volumes:
 
 networks:
   sso:
-    name: whitearchive_sso
+    name: yado_sso

@@ -1,6 +1,6 @@
-# SSO Engine — whitearchive
+# SSO Engine — yado
 
-Central Identity Provider untuk ekosistem whitearchive. User login sekali, bisa akses semua aplikasi (Malas, Scribe, dll.) tanpa login ulang.
+Central Identity Provider untuk ekosistem yado. User login sekali, bisa akses semua aplikasi (Malas, Scribe, dll.) tanpa login ulang.
 
 **Protokol**: OAuth2 Authorization Code + PKCE (RFC 6749 + RFC 7636)
 **URL produksi**: `https://sso.suryatmaja.dev` *(sementara, domain final belum ditentukan)*
@@ -22,8 +22,8 @@ Central Identity Provider untuk ekosistem whitearchive. User login sekali, bisa 
 ### Cara A — Docker (rekomendasi, tidak perlu install PHP/PostgreSQL manual)
 
 ```bash
-git clone <repo-url> sso.whitearchive
-cd sso.whitearchive
+git clone <repo-url> sso.yado
+cd sso.yado
 make docker-fresh
 ```
 
@@ -34,8 +34,8 @@ Akses di `http://localhost:8000`. Detail lengkap: [docs/DOCKER.md](docs/DOCKER.m
 **Prasyarat**: PHP 8.4+, Composer, PostgreSQL
 
 ```bash
-git clone <repo-url> sso.whitearchive
-cd sso.whitearchive
+git clone <repo-url> sso.yado
+cd sso.yado
 
 composer install
 cp .env.example .env
@@ -53,8 +53,8 @@ DB_PASSWORD=
 
 MAIL_MAILER=resend
 RESEND_API_KEY=re_xxx
-MAIL_FROM_ADDRESS=noreply@whitearchive.id
-MAIL_FROM_NAME="SSO whitearchive"
+MAIL_FROM_ADDRESS=noreply@yado.my.id
+MAIL_FROM_NAME="SSO yado"
 ```
 
 ```bash
@@ -170,7 +170,7 @@ docs/
 | `GET /dashboard/audit-log` | Log event keamanan & perubahan data (superadmin) |
 | `GET /dashboard/logs` | Log aplikasi/error mentah (superadmin) |
 | `GET /up` | Health check bawaan Laravel (liveness murni, HTML) |
-| `GET /health` | Health check buat monitoring eksternal (landing page whitearchive) — JSON, cek koneksi DB |
+| `GET /health` | Health check buat monitoring eksternal (landing page yado) — JSON, cek koneksi DB |
 
 ---
 

@@ -1,12 +1,12 @@
-# PRD — SSO Engine (sso.whitearchive.id)
+# PRD — SSO Engine (sso.yado.my.id)
 
 ## Problem Statement
 
-Ekosistem White Archive terdiri dari beberapa aplikasi (saat ini: Malas, Scribe) yang masing-masing butuh autentikasi. Tanpa identity provider terpusat, setiap app harus maintain auth stack sendiri — duplikasi kode, user harus login ulang per app, dan session management tersebar. SSO Engine menyelesaikan ini dengan menyediakan satu titik autentikasi OAuth2 untuk seluruh ekosistem whitearchive.id.
+Ekosistem Yado terdiri dari beberapa aplikasi (saat ini: Malas, Scribe) yang masing-masing butuh autentikasi. Tanpa identity provider terpusat, setiap app harus maintain auth stack sendiri — duplikasi kode, user harus login ulang per app, dan session management tersebar. SSO Engine menyelesaikan ini dengan menyediakan satu titik autentikasi OAuth2 untuk seluruh ekosistem yado.my.id.
 
 ## Target Users
 
-**End users** — individu yang punya akun whitearchive.id dan mengakses satu atau lebih aplikasi dalam ekosistem.
+**End users** — individu yang punya akun yado.my.id dan mengakses satu atau lebih aplikasi dalam ekosistem.
 
 **Superadmin** — pengelola ekosistem yang manage user accounts dan registered OAuth client apps.
 
@@ -14,13 +14,13 @@ Ekosistem White Archive terdiri dari beberapa aplikasi (saat ini: Malas, Scribe)
 
 ## Scope
 
-Project ini membangun Central SSO Engine (`sso.whitearchive.id`) beserta dashboard pengelolaan. Aplikasi-aplikasi klien (Malas, Scribe, dst.) adalah **konsumer** dari SSO ini — mereka tidak dibangun di sini. Arsitektur OAuth2 + PKCE dipilih karena ekosistem akan terus berkembang dan setiap app baru cukup daftar sebagai OAuth client.
+Project ini membangun Central SSO Engine (`sso.yado.my.id`) beserta dashboard pengelolaan. Aplikasi-aplikasi klien (Malas, Scribe, dst.) adalah **konsumer** dari SSO ini — mereka tidak dibangun di sini. Arsitektur OAuth2 + PKCE dipilih karena ekosistem akan terus berkembang dan setiap app baru cukup daftar sebagai OAuth client.
 
 ## Core User Stories
 
 ### End User
-- Saya ingin login sekali di sso.whitearchive.id, sehingga bisa langsung masuk ke semua app ekosistem tanpa login ulang.
-- Saya ingin register akun baru langsung di sso.whitearchive.id, tanpa harus membuka Malas atau Scribe terlebih dahulu.
+- Saya ingin login sekali di sso.yado.my.id, sehingga bisa langsung masuk ke semua app ekosistem tanpa login ulang.
+- Saya ingin register akun baru langsung di sso.yado.my.id, tanpa harus membuka Malas atau Scribe terlebih dahulu.
 - Ketika session masih aktif dan app client redirect ke SSO, saya ingin langsung diteruskan ke app tanpa input password lagi (silent SSO).
 - Saya ingin melihat halaman profil akun saya — info akun, status verifikasi, ganti password, dan daftar session aktif.
 - Saya ingin bisa mencabut session dari device asing yang tidak saya kenali.
@@ -53,7 +53,7 @@ Project ini membangun Central SSO Engine (`sso.whitearchive.id`) beserta dashboa
 
 ### P1 — Done ✓
 
-- **Landing page** (`/`): halaman publik yang menjelaskan SSO Engine — OAuth2 + PKCE, self-service register, ekosistem whitearchive.id. Tautan ke `/login` dan `/register`.
+- **Landing page** (`/`): halaman publik yang menjelaskan SSO Engine — OAuth2 + PKCE, self-service register, ekosistem yado.my.id. Tautan ke `/login` dan `/register`.
 - **My Account** (`/account`): halaman self-service untuk user yang sudah login
   - Info akun: name, username, email, avatar, role, status verifikasi email
   - Ganti password

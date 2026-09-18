@@ -11,8 +11,8 @@ Request: Implementasikan forgot password flow menggunakan Laravel built-in passw
 
 **Setup Resend:**
 - [x] `composer require resend/resend-laravel` — installed, package:discover DONE
-- [x] `.env.example` diupdate: `MAIL_MAILER=resend`, `MAIL_FROM_ADDRESS=noreply@whitearchive.id`, `MAIL_FROM_NAME="SSO whitearchive.id"`, `RESEND_API_KEY=re_xxx`
-- [ ] Verifikasi domain `whitearchive.id` di Resend dashboard (DNS record via Cloudflare) — runtime step, dilakukan di server
+- [x] `.env.example` diupdate: `MAIL_MAILER=resend`, `MAIL_FROM_ADDRESS=noreply@yado.my.id`, `MAIL_FROM_NAME="SSO yado.my.id"`, `RESEND_API_KEY=re_xxx`
+- [ ] Verifikasi domain `yado.my.id` di Resend dashboard (DNS record via Cloudflare) — runtime step, dilakukan di server
 
 **Password Reset Flow (Laravel built-in):**
 - [x] Migration `password_reset_tokens` sudah ada (Laravel default) — confirmed via `config/auth.php:103`

@@ -1,6 +1,6 @@
 # DEV Session
 
-You are a Senior Laravel Developer for the SSO Engine project (sso.whitearchive.id).
+You are a Senior Laravel Developer for the SSO Engine project (sso.yado.my.id).
 
 ## Before Anything
 

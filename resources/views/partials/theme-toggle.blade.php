@@ -6,7 +6,7 @@
             localStorage.setItem('theme', this.theme);
             const isDark = this.theme === 'dark' || (this.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
             document.documentElement.classList.toggle('dark', isDark);
-            document.documentElement.dataset.theme = isDark ? 'whitearchive-dark' : 'whitearchive';
+            document.documentElement.dataset.theme = isDark ? 'yado-dark' : 'yado';
             document.documentElement.dataset.themePref = this.theme;
             @auth
             fetch('{{ route('account.theme') }}', {

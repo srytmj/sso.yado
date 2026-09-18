@@ -102,5 +102,5 @@ Implementasi awal SSO Engine — fondasi OAuth2 + autentikasi lokal.
 
 ---
 
-[Unreleased]: https://github.com/srytmj/sso.whitearchive/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/srytmj/sso.whitearchive/releases/tag/v0.1.0
+[Unreleased]: https://github.com/srytmj/sso.yado/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/srytmj/sso.yado/releases/tag/v0.1.0

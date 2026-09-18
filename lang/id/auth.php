@@ -3,7 +3,7 @@
 return [
     'login_title' => 'Masuk',
     'login_intent_app' => 'Masuk untuk melanjutkan ke :app',
-    'login_intent_default' => 'Akses aplikasi whitearchive melalui masing-masing aplikasi — kamu akan diarahkan ke sini otomatis.',
+    'login_intent_default' => 'Akses aplikasi yado melalui masing-masing aplikasi — kamu akan diarahkan ke sini otomatis.',
     'email_or_username' => 'Email atau Username',
     'password' => 'Password',
     'remember_me' => 'Ingat saya',
@@ -13,7 +13,7 @@ return [
     'register_link' => 'Daftar',
 
     'register_title' => 'Buat Akun',
-    'register_subtitle' => 'Buat akun whitearchive kamu',
+    'register_subtitle' => 'Buat akun yado kamu',
     'full_name' => 'Nama Lengkap',
     'optional' => 'opsional',
     'full_name_placeholder' => 'Kosongkan untuk pakai username',
@@ -37,7 +37,7 @@ return [
     'reset_password_button' => 'Reset Password',
 
     'invite_title' => 'Terima Undangan',
-    'invite_subtitle' => 'Selesaikan setup akun whitearchive kamu',
+    'invite_subtitle' => 'Selesaikan setup akun yado kamu',
     'invite_intro' => 'Undangan untuk :email sebagai :role.',
     'activate_account_button' => 'Aktifkan Akun',
 

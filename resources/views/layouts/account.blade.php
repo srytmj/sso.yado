@@ -12,7 +12,7 @@
     {{-- Mobile tab nav --}}
     <div class="md:hidden bg-base-100 border-b border-base-300">
         <div class="flex items-center justify-between px-4 py-3 border-b border-base-200">
-            <a href="/" class="font-semibold text-base-content text-sm">whitearchive</a>
+            <a href="/" class="font-semibold text-base-content text-sm">yado</a>
             <div class="flex items-center gap-2">
                 @include('partials.theme-toggle')
                 <form method="POST" action="{{ route('logout') }}">
@@ -42,7 +42,7 @@
             {{-- Sidebar desktop --}}
             <aside class="hidden md:block w-44 shrink-0">
                 <div class="flex items-center justify-between mb-5">
-                    <a href="/" class="block font-semibold text-sm text-base-content">whitearchive</a>
+                    <a href="/" class="block font-semibold text-sm text-base-content">yado</a>
                     @include('partials.theme-toggle')
                 </div>
                 <nav class="mb-6">

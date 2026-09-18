@@ -1,12 +1,12 @@
-# Integration Guide — SSO Engine (sso.whitearchive.id)
+# Integration Guide — SSO Engine (sso.yado.my.id)
 
-Panduan untuk developer yang ingin mengintegrasikan aplikasi ke SSO Engine whitearchive.id sebagai OAuth2 client.
+Panduan untuk developer yang ingin mengintegrasikan aplikasi ke SSO Engine yado.my.id sebagai OAuth2 client.
 
 ---
 
 ## Apa itu SSO Engine?
 
-`sso.whitearchive.id` adalah **Central Identity Provider** untuk ekosistem whitearchive.id. Semua aplikasi (Malas, Scribe, dll.) mendelegasikan autentikasi ke sini — user cukup login sekali dan bisa akses semua app tanpa login ulang.
+`sso.yado.my.id` adalah **Central Identity Provider** untuk ekosistem yado.my.id. Semua aplikasi (Malas, Scribe, dll.) mendelegasikan autentikasi ke sini — user cukup login sekali dan bisa akses semua app tanpa login ulang.
 
 Protokol: **OAuth2 Authorization Code + PKCE** (RFC 6749 + RFC 7636). PKCE wajib — tidak ada fallback.
 
@@ -23,10 +23,10 @@ Protokol: **OAuth2 Authorization Code + PKCE** (RFC 6749 + RFC 7636). PKCE wajib
 
 ## Prasyarat (wajib untuk kedua cara)
 
-Sebelum mulai, **minta superadmin** daftarkan aplikasimu di `sso.whitearchive.id/dashboard/applications`:
+Sebelum mulai, **minta superadmin** daftarkan aplikasimu di `sso.yado.my.id/dashboard/applications`:
 
 1. Superadmin buka dashboard → **Add Application**
-2. Isi nama app dan **Redirect URI** (contoh: `https://malas.whitearchive.id/auth/callback`)
+2. Isi nama app dan **Redirect URI** (contoh: `https://malas.yado.my.id/auth/callback`)
    - Wajib HTTPS (kecuali `localhost` untuk development)
    - Redirect URI harus sudah pasti — ini di-whitelist ketat oleh SSO
 3. Klik Create → superadmin dapat **Quick Start panel** berisi credentials siap copy
@@ -35,8 +35,8 @@ Kamu akan menerima dari superadmin:
 ```env
 SSO_CLIENT_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 SSO_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-SSO_REDIRECT_URI=https://yourapp.whitearchive.id/auth/callback
-SSO_BASE_URL=https://sso.whitearchive.id
+SSO_REDIRECT_URI=https://yourapp.yado.my.id/auth/callback
+SSO_BASE_URL=https://sso.yado.my.id
 ```
 
 > **Penting**: `client_secret` hanya ditampilkan sekali saat create. Jika hilang, superadmin harus generate ulang.
@@ -54,14 +54,14 @@ Cara paling cepat. Cocok untuk Laravel, Next.js, atau stack apapun yang AI kamu 
 3. Paste prompt berikut:
 
 ```
-Integrasikan SSO whitearchive.id ke project ini menggunakan panduan berikut:
+Integrasikan SSO yado.my.id ke project ini menggunakan panduan berikut:
 [link ke docs/AI_INTEGRATION.md di repo SSO]
 
 Credentials yang sudah tersedia di .env:
 SSO_CLIENT_ID=xxx
 SSO_CLIENT_SECRET=xxx
 SSO_REDIRECT_URI=xxx
-SSO_BASE_URL=https://sso.whitearchive.id
+SSO_BASE_URL=https://sso.yado.my.id
 ```
 
 4. AI akan mengimplementasikan:
@@ -84,7 +84,7 @@ File referensi untuk AI: [`docs/AI_INTEGRATION.md`](AI_INTEGRATION.md)
 ```
 User buka app
   → belum ada session → redirect ke /auth/redirect
-  → redirect ke sso.whitearchive.id/oauth/authorize
+  → redirect ke sso.yado.my.id/oauth/authorize
   → [session SSO aktif] → silent, langsung dapat code
   → [belum login SSO] → tampil halaman login SSO → login
   → redirect ke /auth/callback?code=xxx&state=xxx
@@ -103,8 +103,8 @@ Tambahkan ke `.env`:
 ```env
 SSO_CLIENT_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 SSO_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-SSO_REDIRECT_URI=https://yourapp.whitearchive.id/auth/callback
-SSO_BASE_URL=https://sso.whitearchive.id
+SSO_REDIRECT_URI=https://yourapp.yado.my.id/auth/callback
+SSO_BASE_URL=https://sso.yado.my.id
 ```
 
 Buat `config/sso.php`:
@@ -114,7 +114,7 @@ return [
     'client_id'     => env('SSO_CLIENT_ID'),
     'client_secret' => env('SSO_CLIENT_SECRET'),
     'redirect_uri'  => env('SSO_REDIRECT_URI'),
-    'base_url'      => env('SSO_BASE_URL', 'https://sso.whitearchive.id'),
+    'base_url'      => env('SSO_BASE_URL', 'https://sso.yado.my.id'),
 ];
 ```
 
@@ -361,7 +361,7 @@ Auth::user()->theme     // "system" | "light" | "dark" — preferensi theme user
 Auth::user()->locale    // "id" | "en" | "ja" — preferensi bahasa user
 ```
 
-Data di-sync setiap kali user login. Untuk update profil, user pergi ke `sso.whitearchive.id/account`.
+Data di-sync setiap kali user login. Untuk update profil, user pergi ke `sso.yado.my.id/account`.
 
 > **Theme & bahasa cross-app**: SSO cuma nyimpen dan expose preferensi ini — app kamu yang harus baca dan menerapkannya sendiri (SSO tidak bisa styling app lain). Contoh implementasi lengkap ada di [`AI_INTEGRATION.md`](AI_INTEGRATION.md) section "Theme & Bahasa".
 
@@ -391,7 +391,7 @@ Response 200:
   "id": 1,
   "name": "Budi Santoso",
   "username": "budi",
-  "email": "budi@whitearchive.id",
+  "email": "budi@yado.my.id",
   "avatar": null,
   "role": { "id": 1, "name": "User", "slug": "user" }
 }
@@ -424,7 +424,7 @@ Ini setup paling umum dan paling sering bikin bingung — SSO dan app kamu jalan
 1. **Port harus beda.** `php artisan serve` default ke port 8000. Kalau SSO sudah pakai 8000, jalankan client app di port lain:
    ```bash
    # Terminal 1 — SSO Engine
-   cd sso.whitearchive && php artisan serve --port=8000
+   cd sso.yado && php artisan serve --port=8000
 
    # Terminal 2 — client app kamu
    cd malas-app && php artisan serve --port=8001

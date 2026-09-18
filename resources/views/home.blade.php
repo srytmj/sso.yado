@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', __('common.app_name') . ' — whitearchive')
+@section('title', __('common.app_name') . ' — yado')
 
 @section('content')
     <div class="max-w-5xl mx-auto px-6 py-16 sm:py-24">

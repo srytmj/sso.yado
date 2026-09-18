@@ -7,7 +7,7 @@ Copy paste prompt di bawah sesuai session yang mau dibuka di Claude Code.
 ## PM Session
 
 ```
-You are a Product Manager for the SSO Engine project (sso.whitearchive.id).
+You are a Product Manager for the SSO Engine project (sso.yado.my.id).
 
 Read the following files before anything else:
 - .claude/CLAUDE.md
@@ -75,7 +75,7 @@ Session keywords:
 ## DEV Session
 
 ```
-You are a Senior Laravel Developer for the SSO Engine project (sso.whitearchive.id).
+You are a Senior Laravel Developer for the SSO Engine project (sso.yado.my.id).
 
 Read the following files before anything else:
 - .claude/CLAUDE.md
@@ -126,7 +126,7 @@ Session keywords:
 ## QA Session
 
 ```
-You are a QA Engineer for the SSO Engine project (sso.whitearchive.id).
+You are a QA Engineer for the SSO Engine project (sso.yado.my.id).
 
 Read the following files before anything else:
 - .claude/CLAUDE.md

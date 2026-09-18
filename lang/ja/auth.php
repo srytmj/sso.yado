@@ -3,7 +3,7 @@
 return [
     'login_title' => 'ログイン',
     'login_intent_app' => ':app に進むためにログインしてください',
-    'login_intent_default' => '各アプリから whitearchive にアクセスすると、自動的にここへリダイレクトされます。',
+    'login_intent_default' => '各アプリから yado にアクセスすると、自動的にここへリダイレクトされます。',
     'email_or_username' => 'メールアドレスまたはユーザー名',
     'password' => 'パスワード',
     'remember_me' => 'ログイン状態を保持する',
@@ -13,7 +13,7 @@ return [
     'register_link' => '新規登録',
 
     'register_title' => 'アカウント作成',
-    'register_subtitle' => 'whitearchive アカウントを作成',
+    'register_subtitle' => 'yado アカウントを作成',
     'full_name' => '氏名',
     'optional' => '任意',
     'full_name_placeholder' => '空欄の場合はユーザー名を使用',
@@ -37,7 +37,7 @@ return [
     'reset_password_button' => 'パスワードをリセット',
 
     'invite_title' => '招待を受ける',
-    'invite_subtitle' => 'whitearchive アカウントの設定を完了してください',
+    'invite_subtitle' => 'yado アカウントの設定を完了してください',
     'invite_intro' => ':email 様への招待（ロール：:role）。',
     'activate_account_button' => 'アカウントを有効化',
 

@@ -1,6 +1,6 @@
 # Deploy ke Azure — SSO Engine
 
-Panduan deploy `sso.whitearchive.id` ke Azure menggunakan **Azure App Service** (cara paling mudah) atau **Azure VM** (lebih kontrol, lebih mirip VPS).
+Panduan deploy `sso.yado.my.id` ke Azure menggunakan **Azure App Service** (cara paling mudah) atau **Azure VM** (lebih kontrol, lebih mirip VPS).
 
 ---
 
@@ -92,7 +92,7 @@ Proyek ini pakai model satu superuser Postgres (bukan pola root + user dedicated
 
 ```bash
 cd /var/www
-sudo git clone https://github.com/srytmj/sso.whitearchive.git sso
+sudo git clone https://github.com/srytmj/sso.yado.git sso
 sudo chown -R azureuser:azureuser /var/www/sso
 cd /var/www/sso
 
@@ -106,8 +106,8 @@ Isi `.env` yang wajib diubah:
 ```env
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://sso.whitearchive.id
-ASSET_URL=https://sso.whitearchive.id   # harus sama dengan APP_URL — tanpa ini CSS tidak load
+APP_URL=https://sso.yado.my.id
+ASSET_URL=https://sso.yado.my.id   # harus sama dengan APP_URL — tanpa ini CSS tidak load
 
 DB_HOST=127.0.0.1
 DB_PORT=5432
@@ -119,7 +119,7 @@ SESSION_DRIVER=database
 
 MAIL_MAILER=resend
 RESEND_API_KEY=re_xxx
-MAIL_FROM_ADDRESS=noreply@whitearchive.id
+MAIL_FROM_ADDRESS=noreply@yado.my.id
 
 ADMIN_EMAIL=your@email.com
 ADMIN_PASSWORD=strong-admin-password
@@ -145,7 +145,7 @@ sudo nano /etc/nginx/sites-available/sso
 ```nginx
 server {
     listen 80;
-    server_name sso.whitearchive.id;
+    server_name sso.yado.my.id;
     root /var/www/sso/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
@@ -192,7 +192,7 @@ sudo chmod -R 775 /var/www/sso/storage /var/www/sso/bootstrap/cache
 
 ```bash
 sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d sso.whitearchive.id
+sudo certbot --nginx -d sso.yado.my.id
 
 # Auto-renewal
 sudo systemctl enable certbot.timer
@@ -213,7 +213,7 @@ sudo systemctl status php8.4-fpm
 sudo systemctl status postgresql
 
 # Test akses
-curl -I https://sso.whitearchive.id
+curl -I https://sso.yado.my.id
 ```
 
 ---
@@ -281,7 +281,7 @@ Di Azure Portal → App Service → **Configuration** → **Application settings
 ```
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://sso.whitearchive.id
+APP_URL=https://sso.yado.my.id
 DB_HOST=<azure-postgres-hostname>
 DB_PORT=5432
 DB_DATABASE=db_sso
@@ -359,9 +359,9 @@ SERVER_PATH=/var/www/sso
 
 ## Checklist Post-Deploy
 
-- [ ] `https://sso.whitearchive.id` bisa diakses, redirect ke landing page
+- [ ] `https://sso.yado.my.id` bisa diakses, redirect ke landing page
 - [ ] Login sebagai superadmin berhasil
-- [ ] `GET https://sso.whitearchive.id/api/user` dengan token valid → return JSON
+- [ ] `GET https://sso.yado.my.id/api/user` dengan token valid → return JSON
 - [ ] Buat OAuth client di dashboard → Quick Start panel muncul
 - [ ] Forgot password → email terkirim via Resend (pastikan `RESEND_API_KEY` diisi dan domain terverifikasi)
 - [ ] SSL aktif, tidak ada mixed content warning

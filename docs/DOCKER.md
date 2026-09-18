@@ -21,8 +21,8 @@ Section ini fokus ke `docker-compose.yml` (dev). Untuk `docker/compose.standalon
 ## Quick Start
 
 ```bash
-git clone https://github.com/srytmj/sso.whitearchive.git
-cd sso.whitearchive
+git clone https://github.com/srytmj/sso.yado.git
+cd sso.yado
 make docker-fresh
 ```
 
@@ -213,8 +213,8 @@ docker compose -f docker/compose.standalone.yml --project-directory . up -d --bu
 Kalau targetnya VM atau LXC container baru di Proxmox, ada skrip khusus yang otomatis: cek/install Docker, setup `.env` kalau belum ada, dan deteksi first-deploy vs update:
 
 ```bash
-git clone https://github.com/srytmj/sso.whitearchive.git
-cd sso.whitearchive
+git clone https://github.com/srytmj/sso.yado.git
+cd sso.yado
 bash scripts/deploy-docker-proxmox.sh
 ```
 
@@ -254,8 +254,8 @@ Kalau kamu punya ~10 project Docker Compose di satu host Proxmox, cara paling ma
    ```env
    APP_ENV=production
    APP_DEBUG=false
-   APP_URL=https://sso.whitearchive.id
-   ASSET_URL=https://sso.whitearchive.id
+   APP_URL=https://sso.yado.my.id
+   ASSET_URL=https://sso.yado.my.id
 
    DB_USERNAME=postgres
    DB_PASSWORD=isi-password-kuat
@@ -264,7 +264,7 @@ Kalau kamu punya ~10 project Docker Compose di satu host Proxmox, cara paling ma
 
 3. **Sesuaikan domain** di `docker/compose.prod.yml`, ganti bagian label Traefik:
    ```yaml
-   - "traefik.http.routers.sso.rule=Host(`sso.whitearchive.id`)"
+   - "traefik.http.routers.sso.rule=Host(`sso.yado.my.id`)"
    ```
 
 4. **Deploy**:
@@ -295,8 +295,8 @@ Pull kode terbaru, rebuild image, `migrate --force` (bukan fresh — data aman),
 
 ### Kalau Punya 10 Project di Host yang Sama
 
-- Tiap project punya `docker/compose.prod.yml` sendiri dengan `name:` unik di baris pertama (supaya nama volume/network tidak tabrakan) — SSO Engine ini sudah pakai `name: sso-whitearchive`.
-- Semua join network `proxy` yang **sama** (satu Traefik untuk semua), tapi masing-masing punya network internal sendiri (`whitearchive_sso_prod` di sini) untuk komunikasi app↔nginx↔postgres yang terisolasi dari project lain.
+- Tiap project punya `docker/compose.prod.yml` sendiri dengan `name:` unik di baris pertama (supaya nama volume/network tidak tabrakan) — SSO Engine ini sudah pakai `name: sso-yado`.
+- Semua join network `proxy` yang **sama** (satu Traefik untuk semua), tapi masing-masing punya network internal sendiri (`yado_sso_prod` di sini) untuk komunikasi app↔nginx↔postgres yang terisolasi dari project lain.
 - Postgres tiap project idealnya **container terpisah** (seperti setup ini) kecuali kamu sengaja mau satu Postgres server dishare banyak project — kalau begitu, ubah `DB_HOST` ke hostname Postgres bersama dan hapus service `postgres` dari compose file ini.
 - Backup: volume `sso_postgres_data` dan `sso_storage` yang perlu di-backup rutin (bukan `sso_public`, itu regenerable dari image).
 

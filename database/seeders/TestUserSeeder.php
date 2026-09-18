@@ -13,7 +13,7 @@ class TestUserSeeder extends Seeder
         $userRole = Role::where('slug', 'user')->firstOrFail();
 
         User::firstOrCreate(
-            ['email' => 'user@whitearchive.id'],
+            ['email' => 'user@yado.my.id'],
             [
                 'name' => 'Test User',
                 'username' => 'testuser',
