@@ -1,6 +1,6 @@
 # API Reference - SSO Engine (sso.yado.my.id)
 
-Referensi teknis semua endpoint HTTP yang dipanggil programmatically (bukan halaman Blade). Untuk panduan integrasi step-by-step, lihat [docs/INTEGRATION.md](INTEGRATION.md) atau [docs/AI_INTEGRATION.md](AI_INTEGRATION.md).
+Referensi teknis semua endpoint HTTP yang dipanggil programmatically (bukan halaman web portal SPA). Untuk panduan integrasi step-by-step, lihat [docs/INTEGRATION.md](INTEGRATION.md), [docs/AI_INTEGRATION.md](AI_INTEGRATION.md), atau [docs/AI_AGENT_GUIDE.md](AI_AGENT_GUIDE.md).
 
 **Base URL**: `https://sso.yado.my.id` (production) - sesuaikan dengan `APP_URL` di environment kamu.
 
@@ -11,7 +11,7 @@ Referensi teknis semua endpoint HTTP yang dipanggil programmatically (bukan hala
 Ada dua model auth berbeda di project ini, jangan tertukar:
 
 - **OAuth2 Bearer token** (`Authorization: Bearer <access_token>`) - dipakai client app buat memanggil `GET /api/user` setelah user selesai login lewat `/oauth/authorize`. Didapat lewat token exchange di `/oauth/token`.
-- **Session cookie** (login web biasa) - dipakai untuk semua halaman Blade (`/login`, `/account/*`, `/dashboard/*`). Bukan cakupan dokumen ini karena bukan API, tapi endpoint session-based yang dipanggil via `fetch()` dari halaman sendiri (`POST /account/theme`, dst.) tetap butuh session cookie + CSRF token, bukan Bearer token.
+- **Session cookie** (login web portal biasa) - dipakai untuk semua halaman Svelte SPA (`/login`, `/account/*`, `/dashboard/*`). Bukan cakupan dokumen ini karena dikelola oleh Inertia.js dan Laravel session cookie.
 
 ---
 

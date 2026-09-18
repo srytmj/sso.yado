@@ -15,6 +15,12 @@ Central Identity Provider (IdP) and single sign-on engine for the **Yado** micro
 - **Protocol**: OAuth 2.0 Authorization Code Grant with Proof Key for Code Exchange (RFC 6749 + RFC 7636)
 - **Token Format**: Bearer Access Tokens (60 min TTL) + Single-Use Rotating Refresh Tokens (30 days TTL)
 
+> [!IMPORTANT]
+> ### 🤖 If you are an AI Agent, Read This First
+> If you are an autonomous AI coding agent (*Cursor, Claude Code, Antigravity, GitHub Copilot, Codex, etc.*) or automated DevOps runner:
+> - **Maintaining or operating this repository**: You MUST read and strictly adhere to [docs/AI_AGENT_GUIDE.md](docs/AI_AGENT_GUIDE.md) before proposing modifications, executing terminal tasks, or rebuilding containers. **Strict Rule**: NEVER execute `php artisan migrate:fresh` on production or live containers. Database state is persistent in the `sso_postgres_data` volume and all updates must be non-destructive (`php artisan migrate --force`).
+> - **Integrating an ecosystem microservice**: Read [docs/AI_AGENT_GUIDE.md](docs/AI_AGENT_GUIDE.md) and [docs/AI_INTEGRATION.md](docs/AI_INTEGRATION.md). Enforcing PKCE `S256`, passing `code_challenge`, handling 60-minute token rotation, and implementing two-phase logout are required specifications.
+
 ---
 
 ## Architecture Overview

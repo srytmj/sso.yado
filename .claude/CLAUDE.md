@@ -2,21 +2,24 @@
 
 ## Project Overview
 
-Central Identity Provider untuk ekosistem Yado. Menyediakan autentikasi OAuth2 terpusat sehingga user cukup login sekali untuk mengakses semua aplikasi dalam ekosistem (Malas, Scribe, dst.).
+Central Identity Provider untuk ekosistem Yado. Menyediakan autentikasi OAuth2 terpusat dengan PKCE (RFC 7636) sehingga user cukup login sekali untuk mengakses semua aplikasi dalam ekosistem.
 
-Ini adalah **backend-only project** (Laravel). UI-nya minimal - hanya halaman login, register, dan consent screen via Blade. Tidak ada frontend SPA terpisah.
+Frontend dibangun dengan **Svelte 5 + Inertia.js v2 SPA**, didukung GSAP animation dan Tailwind CSS v4 + DaisyUI v5 (tema monokrom murni).
 
 ## Project Structure
 
 ```
 root/
-  app/              # Laravel application code
+  app/              # Laravel application code (Controllers, Services, Actions, Models)
   config/           # Config files (database, passport)
   database/         # Migrations, seeders
-  resources/views/  # Blade (auth/, oauth/)
+  resources/
+    js/             # Svelte 5 (Pages/, Layouts/, app.js)
+    css/            # Tailwind v4 & DaisyUI styles (app.css)
+    views/          # app.blade.php (Inertia root HTML)
   routes/           # web.php, api.php
-  scripts/          # deploy.sh, update.sh
-  docs/             # PRD, SRS, STRUCTURE, TODO, tickets/
+  scripts/          # deploy.sh, deploy-docker-proxmox.sh
+  docs/             # PRD, SRS, STRUCTURE, TODO, AI_AGENT_GUIDE.md, AI_INTEGRATION.md
   logs/             # sync.log (gitignored)
   .claude/          # CLAUDE.md + agents/
   Makefile
@@ -30,25 +33,25 @@ root/
 ## Stack (auto-synced from SRS.md)
 
 - Backend: Laravel (latest stable)
-- Auth: Laravel Passport (OAuth2 server)
-- Frontend: Blade + Alpine.js + Tailwind CSS
-- Database: PostgreSQL - `db_sso` (read/write split, sticky mode)
-- Email: Resend (transactional email) - `composer require resend/resend-laravel`
-- Hosting: Linux VM / EC2
+- Auth: Laravel Passport (OAuth2 server - RFC 6749 + RFC 7636 PKCE)
+- Frontend: Svelte 5 (Runes) + Inertia.js v2 + GSAP + Tailwind CSS v4 + DaisyUI v5
+- Database: PostgreSQL 16 - `db_sso` (read/write split, sticky mode, persistent volume)
+- Email: Resend API / SMTP (runtime configurable via dashboard)
+- Hosting: Linux VM / EC2 / Docker (Traefik / Caddy)
 - Tunnel: Cloudflare (DNS + proxy)
 <!-- STACK_END -->
 
 ---
 
-## Backend (Laravel)
+## Backend & Operations Constraints
 
 ### Constraints
 
-- **Backend only.** Tidak ada SPA. Blade hanya untuk halaman auth (login, register, consent).
+- **Single Page App**: Frontend menggunakan Svelte 5 via Inertia.js. Navigasi wajib memakai komponen `<Link>` dari `@inertiajs/svelte` (bukan `<a use:inertia>`).
+- **Database Durability**: DILARANG menjalankan `php artisan migrate:fresh` di server/live container. Gunakan selalu `php artisan migrate --force`.
 - Logic **tidak boleh** di Controller. Controller thin - semua logic di Service atau Action class.
 - PSR-12. Type hints wajib di semua method signature.
 - Database: `db_sso`. Read/write split dengan `sticky: true`.
-- Tidak ada queue atau job (belum dibutuhkan).
 - Passport mengelola semua endpoint `/oauth/*` - jangan override kecuali ada kebutuhan spesifik.
 
 ### Commands

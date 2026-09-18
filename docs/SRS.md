@@ -5,11 +5,11 @@
 | Layer | Choice |
 |-------|--------|
 | Backend | Laravel (latest stable) |
-| Auth | Laravel Passport (OAuth2 server) |
-| Frontend | Blade + Alpine.js + Tailwind CSS |
-| Database | PostgreSQL - `db_sso` (read/write split, sticky mode) |
-| Hosting | Linux VM / EC2 |
-| Email | Resend (transactional email) |
+| Auth | Laravel Passport (OAuth2 server - RFC 6749 + RFC 7636 PKCE) |
+| Frontend | Svelte 5 (Runes) + Inertia.js v2 + GSAP + Tailwind CSS v4 + DaisyUI v5 |
+| Database | PostgreSQL 16 - `db_sso` (read/write split, sticky mode, persistent volume) |
+| Hosting | Linux VM / EC2 / Docker (Traefik / Caddy) |
+| Email | Resend API / SMTP (runtime configurable via dashboard) |
 | Tunnel | Cloudflare (DNS + proxy) |
 
 ---
@@ -50,14 +50,15 @@ root/
   database/
     migrations/
   resources/
+    js/
+      Pages/                            # Svelte 5 pages (Auth, Dashboard, Account)
+      Layouts/                          # Layouts (AuthLayout, DashboardLayout, AccountLayout)
+      app.js                            # Inertia Svelte 5 app initialization
+    css/                                # app.css (Tailwind CSS v4 & DaisyUI v5)
     views/
-      auth/
-        login.blade.php
-        register.blade.php
-      oauth/
-        authorize.blade.php             # consent screen (hidden for trusted)
+      app.blade.php                     # Inertia root layout
   routes/
-    web.php                             # login, register, logout (Blade)
+    web.php                             # Inertia web routes
     api.php                             # /api/user
     oauth.php                           # /oauth/* (Passport)
   docs/

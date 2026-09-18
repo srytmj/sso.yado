@@ -8,8 +8,10 @@ Dokumen ini mendeskripsikan struktur folder project dan konvensi penamaan.
 sso.yado/
   app/                    # Laravel application code
   config/                 # Laravel config files
-  database/               # Migrations, seeders, factories
-  resources/views/        # Blade templates (auth + oauth)
+  resources/
+    js/                   # Svelte 5 pages (Pages/), layouts (Layouts/), app.js
+    css/                  # Tailwind CSS v4 & DaisyUI styles (app.css)
+    views/app.blade.php   # Inertia HTML root template
   routes/                 # web.php, api.php, oauth.php (Passport)
   docs/                   # Dokumentasi project (PRD, SRS, tickets)
   scripts/                # deploy.sh, deploy-docker-proxmox.sh
@@ -31,15 +33,17 @@ sso.yado/
 
 ```
 docs/
+  AI_AGENT_GUIDE.md   # Authoritative operating manual untuk AI coding agents & DevOps
   PRD.md              # Product Requirements Document
   SRS.md              # Software Requirements Specification
   STRUCTURE.md        # File ini
   TODO.md             # Backlog dan catatan informal
   INTEGRATION.md      # Panduan integrasi untuk developer client app (manual)
   AI_INTEGRATION.md   # Brief integrasi untuk AI assistant (lempar ke Claude/Cursor)
+  API.md              # HTTP API endpoint reference & JSON schemas
   DEPLOY_AZURE.md     # Tutorial deploy ke Azure (VM atau App Service)
   DEPLOY_AWS.md       # Tutorial deploy ke AWS (EC2 atau Elastic Beanstalk)
-  DOCKER.md           # Cara jalanin via Docker untuk development lokal
+  DOCKER.md           # Cara jalanin via Docker untuk development lokal & production
   tickets/            # gitignored - internal workflow
     TASK-XXX.md       # Feature tickets
     bugs/
