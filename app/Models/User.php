@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 
@@ -88,7 +89,20 @@ class User extends Authenticatable implements MustVerifyEmailContract
     protected function avatarUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->avatar,
+            get: function () {
+                if (! $this->avatar_path) {
+                    return null;
+                }
+
+                if ($this->avatar_disk === 's3') {
+                    return Storage::disk('s3')->url($this->avatar_path);
+                }
+
+                // Build relative to the current request's host instead of the
+                // static APP_URL config, so avatars load whether the app is
+                // reached via IP, a Tailscale hostname, or the public domain.
+                return url('storage/' . ltrim($this->avatar_path, '/'));
+            },
         );
     }
 }

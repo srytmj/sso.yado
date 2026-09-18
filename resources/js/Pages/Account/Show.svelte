@@ -22,9 +22,17 @@
 
     function submitAvatar(e) {
         const file = e.target.files[0];
-        if (!file) return;
+        // Reset immediately so a stray double-fire of `change` (or re-selecting
+        // the same file later) can't queue a second request for one pick.
+        e.target.value = '';
+
+        if (!file || $avatarForm.processing) return;
+
         $avatarForm.avatar = file;
-        $avatarForm.post('/account/avatar');
+        $avatarForm.post('/account/avatar', {
+            preserveScroll: true,
+            onFinish: () => $avatarForm.reset('avatar')
+        });
     }
 </script>
 

@@ -36,8 +36,8 @@
 
 <div class="min-h-screen bg-base-200 text-base-content font-sans flex flex-col">
     <!-- Top Header -->
-    <header class="bg-base-100/90 backdrop-blur-md border-b border-base-300 sticky top-0 z-20 px-4 sm:px-8 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-4">
+    <header class="relative z-20 bg-base-100/90 backdrop-blur-md border-b border-base-300 sticky top-0 px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-y-2 gap-x-4">
+        <div class="flex items-center gap-4 shrink-0">
             <Link href="/" class="flex items-baseline gap-2 group">
                 <span class="font-serif italic text-2xl font-bold tracking-tight text-base-content group-hover:opacity-80 transition-opacity">Yado</span>
                 <span class="text-[10px] tracking-widest uppercase font-semibold text-base-content/40 bg-base-200 px-1.5 py-0.5 rounded">SSO</span>
@@ -46,18 +46,18 @@
             <span class="text-sm font-semibold text-base-content hidden sm:inline-block">Account Settings</span>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 shrink-0">
             <ThemeToggle />
             <Link
                 href={user?.role?.slug === 'superadmin' || user?.role_id === 1 ? '/dashboard' : '/'}
-                class="btn btn-ghost btn-xs rounded-lg gap-1.5"
+                class="btn btn-ghost btn-xs rounded-lg gap-1.5 relative z-10"
             >
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                 </svg>
                 Back to Dashboard
             </Link>
-            <Link href="/logout" method="post" as="button" class="btn btn-ghost btn-xs text-error hover:bg-error/10 rounded-lg">
+            <Link href="/logout" method="post" as="button" class="btn btn-ghost btn-xs text-error hover:bg-error/10 rounded-lg relative z-10">
                 Sign Out
             </Link>
         </div>

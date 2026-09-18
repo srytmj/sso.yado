@@ -39,15 +39,8 @@ class ApplicationController extends Controller
             'redirect_uri' => ['required', 'string', 'max:1000', new RedirectUriRule()],
         ]);
 
-        $duplicate = Client::query()
-            ->where('name', $validated['name'])
-            ->get()
-            ->contains(fn (Client $client) => in_array($validated['redirect_uri'], $client->redirect_uris, true));
-
-        if ($duplicate) {
-            return back()
-                ->withErrors(['name' => 'Aplikasi dengan nama dan redirect URI yang sama sudah terdaftar.'])
-                ->withInput();
+        if ($error = $this->duplicateError($validated)) {
+            return back()->withErrors($error)->withInput();
         }
 
         $client = $this->service->create($validated);
@@ -69,21 +62,40 @@ class ApplicationController extends Controller
             'redirect_uri' => ['required', 'string', 'max:1000', new RedirectUriRule()],
         ]);
 
-        $duplicate = Client::query()
-            ->where('id', '!=', $application->id)
-            ->where('name', $validated['name'])
-            ->get()
-            ->contains(fn (Client $client) => in_array($validated['redirect_uri'], $client->redirect_uris, true));
-
-        if ($duplicate) {
-            return back()
-                ->withErrors(['name' => 'Aplikasi dengan nama dan redirect URI yang sama sudah terdaftar.'])
-                ->withInput();
+        if ($error = $this->duplicateError($validated, $application)) {
+            return back()->withErrors($error)->withInput();
         }
 
         $this->service->update($application, $validated);
 
         return back()->with('success', 'Application updated.');
+    }
+
+    /**
+     * @param  array{name: string, redirect_uri: string}  $data
+     * @return array<string, string>|null
+     */
+    private function duplicateError(array $data, ?Client $ignoring = null): ?array
+    {
+        $others = Client::query()
+            ->when($ignoring, fn ($query) => $query->where('id', '!=', $ignoring->id))
+            ->get();
+
+        $nameTaken = $others->contains(fn (Client $client) => $client->name === $data['name']);
+
+        if ($nameTaken) {
+            return ['name' => 'Nama aplikasi sudah dipakai.'];
+        }
+
+        $redirectTaken = $others->contains(
+            fn (Client $client) => in_array($data['redirect_uri'], $client->redirect_uris, true)
+        );
+
+        if ($redirectTaken) {
+            return ['redirect_uri' => 'Redirect URI sudah dipakai aplikasi lain.'];
+        }
+
+        return null;
     }
 
     public function revealSecret(Client $application): JsonResponse

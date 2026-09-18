@@ -24,7 +24,6 @@ class UpdateAvatarAction
         }
 
         $user->update([
-            'avatar' => Storage::disk($disk)->url($path),
             'avatar_disk' => $disk,
             'avatar_path' => $path,
         ]);

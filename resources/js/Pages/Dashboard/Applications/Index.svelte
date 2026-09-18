@@ -8,6 +8,8 @@
 
     let tableContainer;
     let deletingId = null;
+    let deleteDialog;
+    let pendingDelete = null;
 
     onMount(() => {
         if (tableContainer) {
@@ -21,12 +23,28 @@
     });
 
     function confirmDelete(client) {
-        if (confirm(`Are you sure you want to delete application "${client.name}"? All associated tokens will be revoked immediately.`)) {
-            deletingId = client.id;
-            router.delete(`/dashboard/applications/${client.id}`, {
-                onFinish: () => deletingId = null
-            });
-        }
+        pendingDelete = client;
+        deleteDialog?.showModal();
+    }
+
+    function closeDeleteModal() {
+        deleteDialog?.close();
+        pendingDelete = null;
+    }
+
+    function performDelete() {
+        if (!pendingDelete) return;
+        const client = pendingDelete;
+        deletingId = client.id;
+        deleteDialog?.close();
+
+        router.delete(`/dashboard/applications/${client.id}`, {
+            preserveScroll: true,
+            onFinish: () => {
+                deletingId = null;
+                pendingDelete = null;
+            }
+        });
     }
 
     function formatDate(dateStr) {
@@ -122,4 +140,29 @@
             </table>
         </div>
     </div>
+
+    <!-- Delete Confirmation Modal -->
+    <dialog bind:this={deleteDialog} class="modal" on:close={() => pendingDelete = null}>
+        <div class="modal-box max-w-sm rounded-2xl">
+            <h4 class="text-sm font-bold text-base-content mb-2">Delete Application</h4>
+            {#if pendingDelete}
+                <p class="text-sm text-base-content/70">
+                    Are you sure you want to delete <span class="font-semibold text-base-content">"{pendingDelete.name}"</span>?
+                    All associated tokens will be revoked immediately. This action cannot be undone.
+                </p>
+            {/if}
+
+            <div class="pt-5 flex justify-end gap-2">
+                <button type="button" class="btn btn-ghost btn-sm rounded-xl" on:click={closeDeleteModal}>
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-error btn-sm rounded-xl px-4" on:click={performDelete}>
+                    Delete
+                </button>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button on:click={closeDeleteModal}>close</button>
+        </form>
+    </dialog>
 </DashboardLayout>

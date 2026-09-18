@@ -16,7 +16,7 @@ class ApplicationService
 
     public function list(): Collection
     {
-        return Client::orderByDesc('created_at')->get();
+        return Client::where('revoked', false)->orderByDesc('created_at')->get();
     }
 
     public function create(array $data): Client
@@ -48,8 +48,12 @@ class ApplicationService
             $token->refreshToken?->update(['revoked' => true]);
         }
 
-        $this->clients->delete($client);
+        $name = $client->name;
 
-        $this->auditLog->record('dashboard.application_deleted', "Aplikasi \"{$client->name}\" dihapus");
+        // Passport's ClientRepository::delete() only flips the `revoked` flag,
+        // it does not remove the row - delete it directly so it stops showing up.
+        $client->delete();
+
+        $this->auditLog->record('dashboard.application_deleted', "Aplikasi \"{$name}\" dihapus");
     }
 }
