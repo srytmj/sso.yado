@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\OAuth\Client;
 use App\Rules\RedirectUriRule;
+use App\Services\AuditLogService;
 use App\Services\Dashboard\ApplicationService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +15,10 @@ use Inertia\Response as InertiaResponse;
 
 class ApplicationController extends Controller
 {
-    public function __construct(private readonly ApplicationService $service) {}
+    public function __construct(
+        private readonly ApplicationService $service,
+        private readonly AuditLogService $auditLog,
+    ) {}
 
     public function index(): InertiaResponse
     {
@@ -34,10 +39,22 @@ class ApplicationController extends Controller
             'redirect_uri' => ['required', 'string', 'max:1000', new RedirectUriRule()],
         ]);
 
+        $duplicate = Client::query()
+            ->where('name', $validated['name'])
+            ->get()
+            ->contains(fn (Client $client) => in_array($validated['redirect_uri'], $client->redirect_uris, true));
+
+        if ($duplicate) {
+            return back()
+                ->withErrors(['name' => 'Aplikasi dengan nama dan redirect URI yang sama sudah terdaftar.'])
+                ->withInput();
+        }
+
         $client = $this->service->create($validated);
 
         return redirect()->route('dashboard.applications.show', $client->id)
-            ->with('new_secret', $client->plainSecret);
+            ->with('new_secret', $client->plainSecret)
+            ->with('success', 'Application created successfully.');
     }
 
     public function show(Client $application): InertiaResponse
@@ -52,9 +69,31 @@ class ApplicationController extends Controller
             'redirect_uri' => ['required', 'string', 'max:1000', new RedirectUriRule()],
         ]);
 
+        $duplicate = Client::query()
+            ->where('id', '!=', $application->id)
+            ->where('name', $validated['name'])
+            ->get()
+            ->contains(fn (Client $client) => in_array($validated['redirect_uri'], $client->redirect_uris, true));
+
+        if ($duplicate) {
+            return back()
+                ->withErrors(['name' => 'Aplikasi dengan nama dan redirect URI yang sama sudah terdaftar.'])
+                ->withInput();
+        }
+
         $this->service->update($application, $validated);
 
         return back()->with('success', 'Application updated.');
+    }
+
+    public function revealSecret(Client $application): JsonResponse
+    {
+        $this->auditLog->record(
+            'dashboard.application_secret_revealed',
+            "Client secret aplikasi \"{$application->name}\" dilihat",
+        );
+
+        return response()->json(['secret' => $application->secret_encrypted]);
     }
 
     public function destroy(Client $application): RedirectResponse

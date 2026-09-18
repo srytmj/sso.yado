@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { gsap } from 'gsap';
     import { Link, page } from '@inertiajs/svelte';
+    import ThemeToggle from '../Components/ThemeToggle.svelte';
 
     export let title = 'Dashboard';
 
@@ -158,6 +159,7 @@
             </div>
 
             <div class="flex items-center gap-3">
+                <ThemeToggle />
                 <Link href="/" class="btn btn-ghost btn-xs text-base-content/60 hover:text-base-content">
                     Landing Page
                 </Link>

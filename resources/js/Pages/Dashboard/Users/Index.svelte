@@ -8,7 +8,8 @@
     export let roles = [];
 
     let tableContainer;
-    let activePasswordUserId = null;
+    let passwordDialog;
+    let activePasswordUser = null;
 
     const passwordForm = useForm({
         new_password: '',
@@ -41,16 +42,23 @@
     }
 
     function openPasswordModal(user) {
-        activePasswordUserId = user.id;
+        activePasswordUser = user;
         passwordForm.reset();
         passwordForm.clearErrors();
+        passwordDialog?.showModal();
     }
 
-    function submitPassword(user) {
-        $passwordForm.patch(`/dashboard/users/${user.id}/password`, {
+    function closePasswordModal() {
+        passwordDialog?.close();
+        activePasswordUser = null;
+    }
+
+    function submitPassword() {
+        if (!activePasswordUser) return;
+        $passwordForm.patch(`/dashboard/users/${activePasswordUser.id}/password`, {
             onSuccess: () => {
-                activePasswordUserId = null;
                 passwordForm.reset();
+                closePasswordModal();
             }
         });
     }
@@ -149,79 +157,14 @@
                                             {user.is_active ? 'Deactivate' : 'Activate'}
                                         </button>
 
-                                        <!-- Password Reset Dropdown / Popover -->
-                                        <div class="relative">
-                                            <button
-                                                type="button"
-                                                class="btn btn-outline btn-xs rounded-lg font-medium"
-                                                on:click={() => activePasswordUserId = activePasswordUserId === user.id ? null : user.id}
-                                            >
-                                                Password
-                                            </button>
-
-                                            {#if activePasswordUserId === user.id}
-                                                <div class="absolute right-0 z-30 mt-2 w-72 bg-base-100 border border-base-300 rounded-2xl shadow-xl p-4 text-left">
-                                                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-base-200">
-                                                        <h4 class="text-xs font-bold text-base-content">Change Password</h4>
-                                                        <button
-                                                            type="button"
-                                                            class="btn btn-ghost btn-xs btn-circle"
-                                                            on:click={() => activePasswordUserId = null}
-                                                        >?</button>
-                                                    </div>
-
-                                                    <form on:submit|preventDefault={() => submitPassword(user)} class="space-y-3">
-                                                        <div class="form-control">
-                                                            <label class="label py-0 pb-1" for="user-new-pass">
-                                                                <span class="label-text text-xs">New Password</span>
-                                                            </label>
-                                                            <input
-                                                                id="user-new-pass"
-                                                                type="password"
-                                                                bind:value={$passwordForm.new_password}
-                                                                placeholder="Min 8 characters"
-                                                                required
-                                                                class="input input-bordered input-xs w-full rounded-lg"
-                                                            />
-                                                            {#if $passwordForm.errors.new_password}
-                                                                <p class="text-[10px] text-error mt-0.5">{$passwordForm.errors.new_password}</p>
-                                                            {/if}
-                                                        </div>
-
-                                                        <div class="form-control">
-                                                            <label class="label py-0 pb-1" for="user-new-pass-confirm">
-                                                                <span class="label-text text-xs">Confirm Password</span>
-                                                            </label>
-                                                            <input
-                                                                id="user-new-pass-confirm"
-                                                                type="password"
-                                                                bind:value={$passwordForm.new_password_confirmation}
-                                                                placeholder="Repeat password"
-                                                                required
-                                                                class="input input-bordered input-xs w-full rounded-lg"
-                                                            />
-                                                        </div>
-
-                                                        <div class="pt-1 flex justify-end gap-2">
-                                                            <button
-                                                                type="button"
-                                                                class="btn btn-ghost btn-xs rounded-lg"
-                                                                on:click={() => activePasswordUserId = null}
-                                                            >
-                                                                Cancel
-                                                            </button>
-                                                            <button
-                                                                type="submit"
-                                                                class="btn btn-neutral btn-xs rounded-lg px-3"
-                                                                disabled={$passwordForm.processing}
-                                                            >
-                                                                Update
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            {/if}
-                                        </div>
+                                        <!-- Password Reset -->
+                                        <button
+                                            type="button"
+                                            class="btn btn-outline btn-xs rounded-lg font-medium"
+                                            on:click={() => openPasswordModal(user)}
+                                        >
+                                            Password
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -256,4 +199,72 @@
             </div>
         {/if}
     </div>
+
+    <!-- Change Password Modal -->
+    <dialog bind:this={passwordDialog} class="modal" on:close={() => activePasswordUser = null}>
+        <div class="modal-box max-w-sm rounded-2xl">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-base-200">
+                <div>
+                    <h4 class="text-sm font-bold text-base-content">Change Password</h4>
+                    {#if activePasswordUser}
+                        <p class="text-xs text-base-content/50 mt-0.5">{activePasswordUser.name}</p>
+                    {/if}
+                </div>
+                <button type="button" class="btn btn-ghost btn-xs btn-circle" on:click={closePasswordModal} aria-label="Close">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <form on:submit|preventDefault={submitPassword} class="space-y-4">
+                <div class="form-control">
+                    <label class="label" for="user-new-pass">
+                        <span class="label-text text-sm font-medium">New Password</span>
+                    </label>
+                    <input
+                        id="user-new-pass"
+                        type="password"
+                        bind:value={$passwordForm.new_password}
+                        placeholder="Min 8 characters"
+                        required
+                        class="input input-bordered w-full rounded-xl"
+                    />
+                    {#if $passwordForm.errors.new_password}
+                        <p class="text-xs text-error mt-1">{$passwordForm.errors.new_password}</p>
+                    {/if}
+                </div>
+
+                <div class="form-control">
+                    <label class="label" for="user-new-pass-confirm">
+                        <span class="label-text text-sm font-medium">Confirm Password</span>
+                    </label>
+                    <input
+                        id="user-new-pass-confirm"
+                        type="password"
+                        bind:value={$passwordForm.new_password_confirmation}
+                        placeholder="Repeat password"
+                        required
+                        class="input input-bordered w-full rounded-xl"
+                    />
+                </div>
+
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" class="btn btn-ghost btn-sm rounded-xl" on:click={closePasswordModal}>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-neutral btn-sm rounded-xl px-4" disabled={$passwordForm.processing}>
+                        {#if $passwordForm.processing}
+                            <span class="loading loading-spinner loading-xs"></span>
+                        {:else}
+                            Update
+                        {/if}
+                    </button>
+                </div>
+            </form>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button on:click={closePasswordModal}>close</button>
+        </form>
+    </dialog>
 </DashboardLayout>

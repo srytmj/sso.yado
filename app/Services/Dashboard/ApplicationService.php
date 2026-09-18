@@ -27,6 +27,8 @@ class ApplicationService
             confidential: true,
         );
 
+        $client->forceFill(['secret_encrypted' => $client->plainSecret])->save();
+
         $this->auditLog->record('dashboard.application_created', "Aplikasi \"{$data['name']}\" dibuat");
 
         return $client;

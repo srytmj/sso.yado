@@ -73,7 +73,7 @@
                     </div>
                     <div class="p-3 bg-base-200/50 rounded-xl">
                         <span class="text-base-content/40 block mb-0.5">Account ID</span>
-                        <span class="font-mono text-base-content/70">{user.id}</span>
+                        <span class="font-mono text-base-content/70">{user.account_id || user.id}</span>
                     </div>
                 </div>
             </div>

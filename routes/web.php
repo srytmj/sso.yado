@@ -98,6 +98,7 @@ Route::middleware(['auth', 'throttle:120,1'])->group(function () {
                 Route::get('/create', [ApplicationController::class, 'create'])->name('create');
                 Route::post('/', [ApplicationController::class, 'store'])->name('store');
                 Route::get('/{application}', [ApplicationController::class, 'show'])->name('show');
+                Route::get('/{application}/secret', [ApplicationController::class, 'revealSecret'])->name('secret');
                 Route::patch('/{application}', [ApplicationController::class, 'update'])->name('update');
                 Route::delete('/{application}', [ApplicationController::class, 'destroy'])->name('destroy');
             });

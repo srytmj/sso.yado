@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { gsap } from 'gsap';
     import { Link, page } from '@inertiajs/svelte';
+    import ThemeToggle from '../Components/ThemeToggle.svelte';
 
     export let title = 'My Account';
 
@@ -46,11 +47,16 @@
         </div>
 
         <div class="flex items-center gap-3">
-            {#if user?.role?.slug === 'superadmin' || user?.role_id === 1}
-                <Link href="/dashboard" class="btn btn-neutral btn-xs rounded-lg">
-                    Admin Dashboard
-                </Link>
-            {/if}
+            <ThemeToggle />
+            <Link
+                href={user?.role?.slug === 'superadmin' || user?.role_id === 1 ? '/dashboard' : '/'}
+                class="btn btn-ghost btn-xs rounded-lg gap-1.5"
+            >
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+                Back to Dashboard
+            </Link>
             <Link href="/logout" method="post" as="button" class="btn btn-ghost btn-xs text-error hover:bg-error/10 rounded-lg">
                 Sign Out
             </Link>

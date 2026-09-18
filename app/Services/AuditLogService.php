@@ -34,6 +34,8 @@ class AuditLogService
         'dashboard.application_created',
         'dashboard.application_updated',
         'dashboard.application_deleted',
+        'dashboard.application_secret_revealed',
+        'dashboard.user_password_changed',
         'settings.mail_updated',
         'settings.avatar_storage_updated',
     ];
