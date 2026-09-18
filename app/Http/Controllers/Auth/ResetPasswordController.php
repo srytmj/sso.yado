@@ -12,7 +12,6 @@ use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class ResetPasswordController extends Controller
 {

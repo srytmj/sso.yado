@@ -7,7 +7,6 @@ use App\Services\AuditLogService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class AuditLogController extends Controller
 {

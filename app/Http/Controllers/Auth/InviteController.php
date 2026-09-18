@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class InviteController extends Controller
 {

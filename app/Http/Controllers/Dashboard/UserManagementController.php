@@ -11,7 +11,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class UserManagementController extends Controller
 {

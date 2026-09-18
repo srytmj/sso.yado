@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class SettingsController extends Controller
 {

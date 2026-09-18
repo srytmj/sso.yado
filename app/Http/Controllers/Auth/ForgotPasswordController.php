@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Password;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class ForgotPasswordController extends Controller
 {

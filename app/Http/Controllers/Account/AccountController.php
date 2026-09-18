@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class AccountController extends Controller
 {

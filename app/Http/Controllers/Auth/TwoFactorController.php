@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class TwoFactorController extends Controller
 {

@@ -8,7 +8,6 @@ use Inertia\Response as InertiaResponse;
 use App\Http\Controllers\Controller;
 use App\Models\OAuth\Client;
 use App\Models\User;
-use Illuminate\InertiaResponse\InertiaResponse;
 
 class DashboardController extends Controller
 {
